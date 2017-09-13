@@ -1,5 +1,5 @@
 # Pathfinder
-Interfaces for making services for matchmaking
+Interfaces for making matchmaking services
 
 Summary
 -------
@@ -11,7 +11,7 @@ What are the objectives of the project?
 ---------------------------------------
 - Provide a basic functionality for creating matchmaking services, that could be used for your own games
 - Make it pretty much scalable and easy to extend in the future, when it will be necessary
-- Have a some open source alternative to the commercial solutions
+- Have an open source alternative to commercial solutions
 - Save developers time and don't reinvent the wheel
 
 References
