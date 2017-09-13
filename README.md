@@ -5,7 +5,7 @@ What are the objectives of the project?
 ---------------------------------------
 - Provide a basic functionality for creating matchmaking services, that could be used for your own games
 - Make it pretty much scalable and easy to extend in the future, when it will be necessary
-- Have an some open source alternative to the commercial solutions
+- Have a some open source alternative to the commercial solutions
 - Save developers time and don't reinvent the wheel
 
 References
