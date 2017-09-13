@@ -3,9 +3,9 @@ Interfaces for making services for matchmaking
 
 Summary
 -------
-- [What are the objectives of the project?](https://github.com/OpenMatchmaking/Pathfinder#what-are-the-objectives-of-the-project)
-- [References](https://github.com/OpenMatchmaking/Pathfinder#references)
-- [License](https://github.com/OpenMatchmaking/Pathfinder#license)
+- [**What are the objectives of the project?**](https://github.com/OpenMatchmaking/Pathfinder#what-are-the-objectives-of-the-project)
+- [**References**](https://github.com/OpenMatchmaking/Pathfinder#references)
+- [**License**](https://github.com/OpenMatchmaking/Pathfinder#license)
 
 What are the objectives of the project?
 ---------------------------------------
