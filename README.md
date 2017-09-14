@@ -4,7 +4,7 @@ Interfaces for making matchmaking services
 Summary
 -------
 - [**What are the objectives of the project?**](https://github.com/OpenMatchmaking/pathfinder#what-are-the-objectives-of-the-project)
-- [**Architecture**]()
+- [**Architecture**](https://github.com/OpenMatchmaking/pathfinder/tree/master/docs)
 - [**References**](https://github.com/OpenMatchmaking/pathfinder#references)
 - [**License**](https://github.com/OpenMatchmaking/pathfinder#license)
 
