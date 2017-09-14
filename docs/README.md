@@ -19,7 +19,7 @@ As you can see at this image it contains three different components:
 3. **Open Matchmaking platform**. That is the core component of our platform, to what we are aiming for. It do everything that related to the matchmaking and that is expected from this service: 
     - Searching an opponent with similar skills (or a suitable team, if it is a competitive game that focus on the teamplay) for each player, so that the chances will be close to the 50/50 percents of win/lose. And it is bringing a lot of opportunites to improve its skills and fun for everyone in each match.
     - Providing a lot different strategies (or matchmaking algorightms), that could be used for different game modes and genres at the same time.
-    - Collecting some statics, that could be used for further data processing, like creating the leaderboards, plays of the day and etcetera after ending each match.
+    - Collecting some statistics, that could be used for further data processing, like creating the leaderboards, plays of the day and etcetera after ending each match.
 
 The next part about we will b talk its how entire components works and communicating with each other. On the high level abstraction it works pretty simple:
 1) The game client sends a request to a server to find a new match for a player. In request body we should specify the player ID, game mode and a used search strategy at least (but we could append something else, when it will be necessary and our server could use it information).
