@@ -1,5 +1,10 @@
 # Architecture
 
+Summary
+-------
+- [**How it works**](https://github.com/OpenMatchmaking/pathfinder/tree/master/docs#how-it-works)
+- [**Protocol**]()
+
 How it works
 ------------
 The matchmaking services are working by the following schema:
