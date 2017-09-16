@@ -28,8 +28,8 @@ The next part about we will b talk its how entire components works and communica
   **NOTE:** This step should be done only once when the player runned a game client, logged into system and runned a searching in the first time.
 4) Server add a new asynchronous task in tasks pool (i.e. Celery with Python 3+) and after it, starting processing a new request.  
 5) Doing business logic:  
-  5.1) Celery worker is running an appropriate Python code that will do some useful work (building a leaderboard, searching a player/team).  
-  5.2) If it will be necessary, Python code could take same data from the storage which stores information about finished maches, players and so on. For instance, during activity of the player all data could be stored in NoSQL storage (like CouchDB, Mnesia, Redis, etc.) and any other data in some relational database (like PostgreSQL, MySQL, etc.).
+  5.1. Celery worker is running an appropriate Python code that will do some useful work (building a leaderboard, searching a player/team).  
+  5.2. If it will be necessary, Python code could take same data from the storage which stores information about finished maches, players and so on. For instance, during activity of the player all data could be stored in NoSQL storage (like CouchDB, Mnesia, Redis, etc.) and any other data in some relational database (like PostgreSQL, MySQL, etc.).
 6) When all required work was completed, finished task put the message with player ID into message queue (it could be RabbitMQ, ZeroMQ, etc.)
 7) Because our web server is subscribed on the messages with particular player ID, it just received this message and extract the result from it.
 8) Return the final response to the API gateway.
