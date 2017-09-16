@@ -1,5 +1,4 @@
-# Pathfinder
-Interfaces for making matchmaking services
+# Documentation
 
 Summary
 -------
