@@ -2,7 +2,7 @@
 
 Summary
 -------
-- [**How it works**](https://github.com/OpenMatchmaking/pathfinder/tree/master/docs#how-it-works)
+- [**How it works**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#how-it-works)
 - [**Protocol**]()
 
 How it works
@@ -10,7 +10,7 @@ How it works
 The matchmaking services are working by the following schema:
 
 <p align="center">
-  <img src="https://github.com/OpenMatchmaking/pathfinder/blob/master/docs/images/Architecture.png"/>
+  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/Architecture.png"/>
 </p>
 
 As you can see at this image it contains three different components:
