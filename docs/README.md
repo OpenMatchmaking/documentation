@@ -43,7 +43,7 @@ The next part about we will be talk its how entire components work and communica
 
 Protocol
 --------
-This following message protocol will be used for communications between different microservice nodes, like API Gateway and matchmaking microservice. The message envelop separated on the two parts:
+This following JSON-based message protocol will be used for communications between different microservice nodes, like API Gateway and matchmaking microservice. The message envelop separated on the two parts:
 - Header info
 - Content
 
@@ -62,7 +62,7 @@ Contains data, that could be used for processing by one the existing microservic
     "microservice_name": "matchmaking-search"
   }
   "content": {
-    "playerId": "0146563d-0f45-4062-90a7-b13a583defad",
+    "player_id": "0146563d-0f45-4062-90a7-b13a583defad",
     "game_mode": "team-deathmatch",
   }
 }
