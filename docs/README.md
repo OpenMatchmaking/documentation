@@ -3,7 +3,7 @@
 Summary
 -------
 - [**How it works**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#how-it-works)
-- [**Protocol**]()
+- [**Protocol**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#protocol)
 
 How it works
 ------------
@@ -22,7 +22,7 @@ As you can see at this image it contains three different components:
     - Collecting some statistics, that could be used for further data processing, like creating the leaderboards, plays of the day and etcetera after ending each match.
 
 The next part about we will be talk its how entire components work and communicating with each other. On the high level abstraction it works pretty simple:
-1) The game client sends a request to an API gateway server to find a new match for a player. In request body we should specify the player ID, game mode and a used search strategy at least (but we could append something else, when it will be necessary and our server could use it information).
+1) The game client sends a request to an API Gateway server to find a new match for a player. In request body we should specify the player ID, game mode and a used search strategy at least (but we could append something else, when it will be necessary and our server could use it information).
 2) After receiving a request from a player, API Gateway wrap this request into a "message" and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, API Gateway listening a message in a mailbox with the appropriate request_id.
 3) One of the appropriate servers which is could process it, takes the message from the message queue. The processing node receives the request, and before its processing do subscribing on the messages with the player ID, that was specified in request.   
 **NOTE:** This step should be done only once when the player runned a game client, logged into system and runned a searching in the first time.
@@ -40,3 +40,30 @@ The next part about we will be talk its how entire components work and communica
 13) API Gateway like on the previous steps, wraps a request into a "message" and put it in one of available message queues. Also subscribing to getting a response from a some existing processing node. When the message will recieved, return it to a caller.
 14) One of the appropriate servers which is could process it, takes the message from the message queue. Unwraps the message, and do some useful work. Puts the message into a message queue with the label, that data processing was started.
 15) Matchmaking service received a request to save this part of data, and update/refresh it in the appropriate storage.
+
+Protocol
+--------
+This following message protocol will be used for communications between different microservice nodes, like API Gateway and matchmaking microservice. The message envelop separated on the two parts:
+- Header info
+- Content
+
+### Header info
+- Request ID - A unique identifier per each incoming request.
+- Microservice name - A unique microservice name which is used for understanding which service should process this request.
+
+### Content
+Contains a data, that could be used for processing by one the existing microservices. If no data required, that left this field as an empty dictionary.
+
+### Example of incoming request from a game client
+```javascript
+{
+  "header_info": {
+    "request_id": "6ed85c05-7302-402c-892c-1ae3f78ac355"
+    "microservice_name": "matchmaking-search"
+  }
+  "content": {
+    "playerId": "0146563d-0f45-4062-90a7-b13a583defad",
+    "game_mode": "team-deathmatch",
+  }
+}
+```
