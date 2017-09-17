@@ -52,7 +52,7 @@ This following message protocol will be used for communications between differen
 - Microservice name - A unique microservice name which is used for understanding which service should process this request.
 
 ### Content
-Contains a data, that could be used for processing by one the existing microservices. If no data required, that left this field as an empty dictionary.
+Contains data, that could be used for processing by one the existing microservices. If no data required, that left this field as an empty dictionary.
 
 ### Example of incoming request from a game client
 ```javascript
