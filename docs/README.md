@@ -48,8 +48,11 @@ This following JSON-based message protocol will be used for communications betwe
 - Content
 
 ### Header info
-- Request ID - A unique identifier per each incoming request.
+- Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/from message queue.
 - Microservice name - A unique microservice name which is used for understanding which service should process this request.
+- Request URI - String which is used to identify a resource.
+- HTTP method - Applied HTTP method over the resource. Just provide it as is in message further.
+- Expires-At - Specified the time, when the message should be dropped from a message queue. Optional.
 
 ### Content
 Contains data, that could be used for processing by one the existing microservices. If no data required, that left this field as an empty dictionary.
@@ -58,12 +61,14 @@ Contains data, that could be used for processing by one the existing microservic
 ```javascript
 {
   "header_info": {
-    "request_id": "6ed85c05-7302-402c-892c-1ae3f78ac355"
-    "microservice_name": "matchmaking-search"
+    "Request-ID": "6ed85c05-7302-402c-892c-1ae3f78ac355"
+    "Microservice-Name": "matchmaking",
+    "Request-URI": "/search-game/"
+    "HTTP-Method": "GET"
   }
   "content": {
-    "player_id": "0146563d-0f45-4062-90a7-b13a583defad",
-    "game_mode": "team-deathmatch",
+    "Player-ID": "0146563d-0f45-4062-90a7-b13a583defad",
+    "Game-Mode": "team-deathmatch"
   }
 }
 ```
