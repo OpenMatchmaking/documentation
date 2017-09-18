@@ -48,7 +48,7 @@ This following JSON-based message protocol will be used for communications betwe
 - Content
 
 ### Header info
-- Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/from message queue.
+- Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/taken from a message queue.
 - Microservice name - A unique microservice name which is used for understanding which service should process this request.
 - Request URI - String which is used to identify a resource.
 - HTTP method - Applied HTTP method over the resource. Just provide it as is in message further.
