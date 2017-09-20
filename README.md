@@ -3,7 +3,7 @@
 Summary
 -------
 - [**What are the objectives of the project?**](https://github.com/OpenMatchmaking/documentation#what-are-the-objectives-of-the-project)
-- [**Architecture**](https://github.com/OpenMatchmaking/documentation/tree/master/docs)
+- [**Documentation**](https://github.com/OpenMatchmaking/documentation/tree/master/docs)
 - [**References**](https://github.com/OpenMatchmaking/documentation#references)
 - [**License**](https://github.com/OpenMatchmaking/documentation#license)
 
