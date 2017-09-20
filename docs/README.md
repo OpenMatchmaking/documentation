@@ -51,7 +51,7 @@ Nonetheless, in this case the matchmaking services are working by the following 
 
 ### With Auth/Auth microservice
 This case will be good for the project when:
-- In the could each component has its own Authentication / Authorization layer. And Open Matchmaking platform should not be an exception.
+- In cloud each component has its own Authentication / Authorization layer. And Open Matchmaking platform should not be an exception.
 - The project have a private cloud, but you can't get an access to add some external dependencies and necessary somehow provide a way to connect players together.
 - Necessary to divide the project on the small parts, which can be developed by different developers and studios (like sharing of responsibility), but you need also a Authentication / Authorization layer.
 
