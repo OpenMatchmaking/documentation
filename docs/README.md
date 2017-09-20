@@ -3,17 +3,13 @@
 Summary
 -------
 - [**How it works**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#how-it-works)
+  - [**Without Auth/Auth microservice**]()
+  - [**With Auth/Auth microservice**]()
 - [**Protocol**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#protocol)
 
 How it works
 ------------
-The matchmaking services are working by the following schema:
-
-<p align="center">
-  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/Architecture.png"/>
-</p>
-
-As you can see at this image it contains three different components:
+Before you will dive into details, let's mention components, which are used during the architecture consideration:
 1. **Game client**. Represents a certain "unified shell" for each active user, which is connected to the main game server and exchanges data with it if necessary.
 2. **Game server**. Represents an existing node in a cluster, which transmits data about its internal state of the particular game and allow its connected clients to maintain their own accurate version of the game world for display to players. Also could processing/receiving each player's input, messages and so on.
 3. **Open Matchmaking platform**. That is the core component of our platform, to what we are aiming for. It do everything that related to the matchmaking and that is expected from this service: 
@@ -21,7 +17,19 @@ As you can see at this image it contains three different components:
     - Providing a lot different strategies (or matchmaking algorightms), that could be used for different game modes and genres at the same time.
     - Collecting some statistics, that could be used for further data processing, like creating the leaderboards, plays of the day and etcetera after ending each match.
 
-The next part about we will be talk its how entire components work and communicating with each other. On the high level abstraction it works pretty simple:
+Now let's move on to the two diffent cases of usage Open Matchmaking platform for your own game. 
+
+### Without Auth/Auth microservice
+This use case will be a good fit when:
+- Have a private cloud and want to use Open Matchmaking platform as a part of existing infrastructure, which is also has implemented Authentication / Autorization layer. If you're going this way, then necessary to keep in mind, that you've made additional check (for instance, check permissions to get an access to matchmaking part).
+- No need Auth / Auth part (but need to be care, if you're doing so).
+
+Nonetheless, in this case the matchmaking services are working by the following schema:
+
+<p align="center">
+  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/architecture-no-auth.png"/>
+</p>
+
 1) The game client sends a request to an API Gateway server to find a new match for a player. In request body we should specify the player ID, game mode and a used search strategy at least (but we could append something else, when it will be necessary and our server could use it information).
 2) After receiving a request from a player, API Gateway wrap this request into a "message" and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, API Gateway listening a message in a mailbox with the appropriate request_id.
 3) One of the appropriate servers which is could process it, takes the message from the message queue. The processing node receives the request, and before its processing do subscribing on the messages with the player ID, that was specified in request.   
@@ -41,6 +49,16 @@ The next part about we will be talk its how entire components work and communica
 14) One of the appropriate servers which is could process it, takes the message from the message queue. Unwraps the message, and do some useful work. Puts the message into a message queue with the label, that data processing was started.
 15) Matchmaking service received a request to save this part of data, and update/refresh it in the appropriate storage.
 
+### With Auth/Auth microservice
+This case will be good for the project when:
+- In the could each component has its own Authentication / Authorization layer. And Open Matchmaking platform should not be an exception.
+- The project have a private cloud, but you can't get an access to add some external dependencies and necessary somehow provide a way to connect players together.
+- Necessary to divide the project on the small parts, which can be developed by different developers and studios (like sharing of responsibility), but you need also a Authentication / Authorization layer.
+
+<p align="center">
+  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/architecture-with-auth.png"/>
+</p>
+
 Protocol
 --------
 This following JSON-based message protocol will be used for communications between different microservice nodes, like API Gateway and matchmaking microservice. The message envelop separated on the two parts:
@@ -53,6 +71,7 @@ This following JSON-based message protocol will be used for communications betwe
 - Request URI - String which is used to identify a resource.
 - HTTP method - Applied HTTP method over the resource. Just provide it as is in message further.
 - Expires-At - Specified the time, when the message should be dropped from a message queue. Optional.
+- Token - Unique token specified for each client. Required when Authentication / Authorization layer was enabled.
 
 ### Content
 Contains data, that could be used for processing by one the existing microservices. If no data required, that left this field as an empty dictionary.
