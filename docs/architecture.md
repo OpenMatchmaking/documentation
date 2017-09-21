@@ -2,10 +2,10 @@
 
 Summary
 -------
-- [**How it works**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#how-it-works)
-  - [**Without Auth/Auth microservice**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#without-authauth-microservice)
-  - [**With Auth/Auth microservice**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#with-authauth-microservice)
-- [**Protocol**](https://github.com/OpenMatchmaking/documentation/tree/master/docs#protocol)
+- [**How it works**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#how-it-works)
+  - [**Without Auth/Auth microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#without-authauth-microservice)
+  - [**With Auth/Auth microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#with-authauth-microservice)
+- [**Protocol**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#protocol)
 
 How it works
 ------------
@@ -30,24 +30,26 @@ Nonetheless, in this case the matchmaking services are working by the following 
   <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/architecture-no-auth.png"/>
 </p>
 
-1) The game client sends a request to an API Gateway server to find a new match for a player. In request body we should specify the player ID, game mode and a used search strategy at least (but we could append something else, when it will be necessary and our server could use it information).
-2) After receiving a request from a player, API Gateway wrap this request into a "message" and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, API Gateway listening a message in a mailbox with the appropriate request_id.
+1) The game client sends a request to find a new match for a player to a load balancer, which is redirecting user to an existing reverse proxy server. In request body we should specify the player ID, game mode and a used search strategy at least (but we could append something else, when it will be necessary and our server could use it information).
+2) After receiving a request from a player, reverse proxy will wrap this request into a "message" and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, reverse proxy just listening for a message in a mailbox with the appropriate request_id, which was set by it.
 3) One of the appropriate servers which is could process it, takes the message from the message queue. The processing node receives the request, and before its processing do subscribing on the messages with the player ID, that was specified in request.   
 **NOTE:** This step should be done only once when the player runned a game client, logged into system and runned a searching in the first time.
-4) Server add a new asynchronous task in tasks pool (i.e. Celery with Python 3+) and after it, starting processing a new request.  
+4) Server adds a new asynchronous task in tasks pool (i.e. Celery with Python 3+) and after it, starts processing a new request.  
 5) Doing business logic:  
-  5.1. On of the exissting worker is running an appropriate code that will do some useful work (building a leaderboard, searching a player/team).  
+  5.1. On of the existing worker is running an appropriate code that will do some useful work (building a leaderboard, searching a player/team).  
   5.2. If it will be necessary, this code could take same data from the storage which stores information about finished maches, players and so on. For instance, during activity of the player all data could be stored in NoSQL storage (like CouchDB, Mnesia, Redis, etc.) and any other data in some relational database (like PostgreSQL, MySQL, etc.).
-6) When all required work was completed, finished task put the message with player ID into message queue (it could be RabbitMQ, ZeroMQ, etc.)
+6) When all required work were completed, finished task put the message with player ID into message queue (it could be RabbitMQ, ZeroMQ, etc.)
 7) Because our backend server is subscribed on the messages with particular player ID, it just received this message from a message queue, extract the result from it, make some additional post-processing actions (if it will be necessary) and put the new message in one on message queues.
-8) Because the API Gateway listens messages with the particular request_id, it extract the message from a message queue, when it will be appeared.
-9) Send a response to the waiting game client with the data that was extracted on the previous step.
+8) Because the reverse proxy is listening messages with the particular request_id, it extract the message from a message queue, when it will be appeared and prepare the response for the game client.
+9) Send a response to the waiting game client with the data that was prepared on the previous step.
 10) Game client is trying to connect to the prepared game server, entering into already created game lobby and waiting until other players will be connected.
 11) After the game is prepared, game server started a new game with the connected users. The game server and game client just communicating with each other and sychronizing game states and do some additional work that required during the current game session.
-12) When the game was finished, game client send a request with information about the completed game in body to the API Gateway.
-13) API Gateway like on the previous steps, wraps a request into a "message" and put it in one of available message queues. Also subscribing to getting a response from a some existing processing node. When the message will recieved, return it to a caller.
+12) When the game was finished, game server sends a request with information about the completed game in body to the redirected reverse proxy node, selected by the load balancer.
+13) Proxy server like on the previous steps, wraps a request into a "message" and put it in one of available message queues. Also subscribing to getting a response from a some existing processing node. When the message will be recieved, will return it to a caller.
 14) One of the appropriate servers which is could process it, takes the message from the message queue. Unwraps the message, and do some useful work. Puts the message into a message queue with the label, that data processing was started.
 15) Matchmaking service received a request to save this part of data, and update/refresh it in the appropriate storage.
+
+And so on... Each inner microservice of Open Matchmaking could do some work and could returns (or not) a response to the game client / game server if it will be necessary. It all depends on the particular case of using it and what necessary to do.
 
 ### With Auth/Auth microservice
 This case will be good for the project when:
@@ -69,7 +71,6 @@ This following JSON-based message protocol will be used for communications betwe
 - Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/taken from a message queue.
 - Microservice name - A unique microservice name which is used for understanding which service should process this request.
 - Request URI - String which is used to identify a resource.
-- HTTP method - Applied HTTP method over the resource. Just provide it as is in message further.
 - Expires-At - Specified the time, when the message should be dropped from a message queue. Optional.
 - Token - Unique token specified for each client. Required when Authentication / Authorization layer was enabled.
 
@@ -83,7 +84,6 @@ Contains data, that could be used for processing by one the existing microservic
     "Request-ID": "6ed85c05-7302-402c-892c-1ae3f78ac355"
     "Microservice-Name": "matchmaking",
     "Request-URI": "/search-game/"
-    "HTTP-Method": "GET"
   }
   "content": {
     "Player-ID": "0146563d-0f45-4062-90a7-b13a583defad",
