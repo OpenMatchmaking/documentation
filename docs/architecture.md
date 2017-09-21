@@ -85,7 +85,7 @@ It works almost in the same way as [without the Authentication / Authorization m
 13) Send a response to the waiting game client with the data that was prepared on the previous step.
 14) Game client is trying to connect to the prepared game server, entering into already created game lobby and waiting until other players will be connected.
 15) After the game is prepared, game server started a new game with the connected users. The game server and game client just communicating with each other and sychronizing game states and do some additional work that required during the current game session.  
-16) When the game was finished, game server sends a request with information about the completed game in body to the reverse proxy node. 
+16) When the game was finished, game server sends a request with information about the completed game in body to the reverse proxy node.   
 **NOTE:** In order to avoid cluttering the scheme the part about communicating with Auth/Auth part and checking access token is hidden. But game server should do the same things as the game client (get the reverse proxy IP with token and check it on the reverse proxy side later).
 17) Reverse proxy like on the previous steps, wraps a request into a "message" and put it in one of available message queues. Also subscribing to getting a response from a some existing processing node. When the message will be recieved, will return it to a caller.
 18) One of the appropriate servers which is could process it, takes the message from the message queue. Unwraps the message, and do some useful work. Puts the message into a message queue with the label, that data processing was started.
