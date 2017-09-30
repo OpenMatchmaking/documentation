@@ -4,7 +4,7 @@ Here you can find a list of components which are сompose together the Open Matc
 
 Summary
 -------
-- [**Reverse Proxy**]()
+- [**Reverse Proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#reverse-proxy)
 
 Reverse proxy
 ------------
@@ -15,12 +15,12 @@ Reverse proxy
 
 ### How it works
 What is reverse proxy?
-> Is a type of proxy server, which is retrieving resources on behalf of a client from one or more servers. Each of those resources are returned to the waiting client so that it looks like a they was prepared by the web server itself. Moreover, each reverse proxy is an intermediate node for its associated servers to be contacted by any client.
+> Is a type of proxy server, which is retrieving resources on behalf of a client from one or more servers. Each of those resources are returned to the waiting client so that it looks like a they was prepared by the web server itself. Moreover, each reverse proxy is an intermediate node for its associated servers to be contacted by any client.  
 
 Now, when you was get an idea what is it, let's see on the next scheme:
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/reverse-proxy.png"/>
 </p>
 
 1) Client connecting with a reverse proxy via some protocol (for instance, HTTP or WebSockets). And sends some part of data to it. If necessary to check credentials / tokens / etc. the reverse proxy also can do this work.
