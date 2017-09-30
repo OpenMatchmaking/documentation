@@ -1,6 +1,6 @@
 # Componets
 
-Here you can find a list of components which are сompose together the Open Matchmaking platform.
+Here you can find a list of components which are сomposing the Open Matchmaking platform.
 
 Summary
 -------
