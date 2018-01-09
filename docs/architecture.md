@@ -95,16 +95,17 @@ And so on...
 
 Protocol
 --------
-This following JSON-based message protocol will be used for communications between different microservice nodes, like API Gateway and matchmaking microservice. The message envelop separated on the two parts:
-- Header info
+This following JSON-based message protocol will be used for communications between different microservice nodes, like API Gateway and matchmaking microservice. The message is split on the two parts::
+- Headers
 - Content
 
-### Header info
-- Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/taken from a message queue.
+### Headers
+- Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/taken from a message queue. Can be used as a response topic/queue name for a certain client.
 - Microservice name - A unique microservice name which is used for understanding which service should process this request.
 - Request URI - String which is used to identify a resource.
-- Expires-At - Specified the time, when the message should be dropped from a message queue. Optional.
+- Permissions - List of permissions to resources. Optional.
 - Token - Unique token specified for each client. Required when Authentication / Authorization layer was enabled.
+- Event-Name - String identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
 
 ### Content
 Contains data, that could be used for processing by one the existing microservices. If no data required, that left this field as an empty dictionary.
@@ -112,10 +113,13 @@ Contains data, that could be used for processing by one the existing microservic
 ### Example of incoming request from a game client
 ```javascript
 {
-  "header_info": {
+  "headers": {
     "Request-ID": "6ed85c05-7302-402c-892c-1ae3f78ac355"
     "Microservice-Name": "matchmaking",
-    "Request-URI": "/search-game/"
+    "Request-URI": "/search-game/",
+    "Permissions": "matchmaking.search.get; leaderboard.potg.get",
+    "Token": "some user token",
+    "Event-Name": "get-opponents-event"
   }
   "content": {
     "Player-ID": "0146563d-0f45-4062-90a7-b13a583defad",
