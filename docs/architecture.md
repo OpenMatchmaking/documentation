@@ -113,7 +113,7 @@ Contains data, that could be used for processing by one the existing microservic
 ### Token
 Represent a unique token per each client for getting an access to microservices functionality. Required when Authentication / Authorization layer was enabled.
 
-### Example of incoming request from a game client
+### Example of a request
 ```javascript
 {
   "headers": {
