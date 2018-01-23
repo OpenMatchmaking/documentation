@@ -16,16 +16,13 @@ What are the objectives of the project?
 
 References
 ----------
-- [Erlang Factory San Francisco 2015, Undead Labs, Jamie Winsor - Building And Releasing A Massively Multiplayer Online Game](https://www.recaps.io/building-and-releasing-an-elixir-based-mmog/)
+- [Erlang Factory SF 2015, Undead Labs, Jamie Winsor - Building And Releasing A Massively Multiplayer Online Game](https://www.recaps.io/building-and-releasing-an-elixir-based-mmog/)
 - Erlang Factory London 2010, Demonware, Malcolm Dowse - Erlang and First-Person Shooters in online games
   - [Slides](https://www.erlang-factory.com/upload/presentations/395/ErlangandFirst-PersonShooters.pdf)
   - [Record](https://vimeo.com/26307654)
 - [PyCon Ireland 2011, Demonware, Damien Marshall - Keynote speech: Using Python at Demonware](https://vimeo.com/31781454)
 - [Dave Kuhlman - Multiprocessing in Python: a guided tour with examples](http://www.davekuhlman.org/python_multiprocessing_01.html#erlang-erlport-python)
 - [GDC 2016, Activision, Josh Menke - Skill, Matchmaking, and Ranking Systems Design](https://www.youtube.com/watch?v=-pglxege-gU)
-- GDC 2008, Blizzard Entertainment, Rob Pardo - Rules of Engagement: Blizzard's Approach to Multiplayer Game Design
-  - [Article](https://www.engadget.com/2008/02/20/gdc08-live-from-rob-pardo-talks-about-blizzards-approach-to-mm/)
-  - [Audio record](https://www.gdcvault.com/play/315/Rules-of-Engagement-Blizzard-s)
 
 License
 -------
