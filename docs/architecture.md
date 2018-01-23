@@ -5,7 +5,7 @@ Summary
 - [**How it works**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#how-it-works)
   - [**Without Auth/Auth microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#without-authauth-microservice)
   - [**With Auth/Auth microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#with-authauth-microservice)
-- [**Protocol**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#protocol)
+- [**Protocol**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/protocol.md)
 
 How it works
 ------------
@@ -90,43 +90,3 @@ It works almost in the same way as [without the Authentication / Authorization m
 17) Reverse proxy like on the previous steps, wraps a request into a "message" and put it in one of available message queues. Also subscribing to getting a response from a some existing processing node. When the message will be recieved, will return it to a caller.
 18) One of the appropriate servers which is could process it, takes the message from the message queue. Unwraps the message, and do some useful work. Puts the message into a message queue with the label, that data processing was started.
 19) Matchmaking service received a request to save this part of data, and update/refresh it in the appropriate storage.
-  
-And so on...
-
-Protocol
---------
-This following JSON-based message protocol will be used for communications between different microservice nodes, like API Gateway and matchmaking microservice. The message is split onto three parts:
-- Headers
-- Content
-- Token
-
-### Headers
-- Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/taken from a message queue. Can be used as a response topic/queue name for a certain client.
-- Microservice name - A unique microservice name which is used for understanding which service should process this request.
-- Request URI - String which is used to identify a resource.
-- Permissions - List of permissions to resources. Optional.
-- Event-Name - String identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
-
-### Content
-Contains data, that could be used for processing by one the existing microservices. If no data required, that left this field as an empty dictionary.
-
-### Token
-Represent a unique token per each client for getting an access to microservices functionality. Required when Authentication / Authorization layer was enabled.
-
-### Example of a request
-```javascript
-{
-  "headers": {
-    "Request-ID": "6ed85c05-7302-402c-892c-1ae3f78ac355"
-    "Microservice-Name": "matchmaking",
-    "Request-URI": "/search-game/",
-    "Permissions": "matchmaking.search.get; leaderboard.potg.get",
-    "Event-Name": "get-opponents-event"
-  },
-  "content": {
-    "Player-ID": "0146563d-0f45-4062-90a7-b13a583defad",
-    "Game-Mode": "team-deathmatch"
-  },
-  "token": "a unique token"
-}
-```
