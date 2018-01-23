@@ -4,7 +4,33 @@ Distributing tasks for a search
 -------------------------------
 For solving this complex task, especially with using microservices, we should make it asynchronous, because don't know actually how much time it takes. In theory it could be infinitely, but on practice it doesn't occur, because we could stop search after a long period of time or re-run a search but with slightly updated parameters.
 
-The basic idea for distributing task for searching is split up players by some criterias on small groups. For example, by a current rating or range of it. The more groups we create, then more balanced will be games between the players. But, of cource, it's necessary to keep in mind that their should not be too much relatively to overall amount of active players.
+The basic idea for distributing task for searching is split up players by some criterias on small groups. For example, by a current rating or range of it. The more groups we create, then more balanced will be games between the players. But, of cource, it's necessary to keep in mind that their should not be too much relatively to overall amount of active players. 
+
+How much groups of players should be? It mainly depends on the game, to which you are going to add the competitive constituent. For example, for MOBA games we could split up the people on groups with 500 rating points difference between the groups (alike in Ovewatch and League of Legends titles):
+  - 1000 - 1500 => Bronze
+  - 1500 - 2000 => Silver
+  - 2000 - 2500 => Gold
+  - 2500 - 3000 => Platinum
+  - 3000 - 3500 => Diamond
+  - 3500 - 4000 => Semi-Pro
+  - 4000 - 4500 => Professional
+
+Then, after creating groups, necessary to figure out, how to processing requests from a clients that would like to play in game with other players. Well, the simpler and more understandable the solution, the better the result we will get. Look at the following picture, how it can be potentially solved:
+
+<p align="center">
+  <img src=""/>
+</p>
+
+The demonstrated schema is pretty straightforward. For getting an idea how it should work, we will consider a case for searching a game for a diamond player (for any other league it will work by analogy): 
+1) The client sends the message for processing to a generic queue. For server response the client will create, register and subscribe for updates a response queue.
+2) The "message consumers" will extract a message from it and transmit it into certain queue for further processing, which is depends on the elo, specified in the incoming message. 
+3) Worker is trying to find a suitable player for a new game:  
+  3.1. Because each worker is linked to the specific queue, it will extract message in sequence and try to analyze it. If the player, the information about which was specified in the message body, is according to the matchmaking algorithm, then the data will be saved in the memory of the worker and the extracted message deleted. This is repeated until the worker have enough players to fill the game lobby.  
+  3.2. Otherwise the message will be returned the source queue for processing by an another worker.
+4) The prepared list of players will be sending as a message to the next queue, so that it can be processed by the appropriate worker which is creating a new game lobby (or choosing from one of existing). After that it will broadcast the server IP-address, port and connection credentials to each player mentioned in the list via particular response queues, that were specified by clients in the first step.
+5) Each client is getting the response from response queue, connecting to the game lobby.
+
+So, as you can see the logic here is pretty simple. Why it was developed this way? The answer is obvious: to get the as much as possible efficient and scalable servers for processing incoming requests, so that each part can be scaled by your needs and expectations for your own game.
 
 Strategies of a searching players
 ---------------------------------
@@ -30,7 +56,7 @@ Description: Using an average rating is presuming that the players are playing i
 Example of games: Overwatch
 
 Pros:
-  - Works good for team-based, when each player playing without a group
+  - Works good for team-based games, when each player playing without a group
   - Stable and enjoyable games even for new players
   - Simple to implement for the cases when players are playing in the group
 
