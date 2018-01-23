@@ -34,7 +34,7 @@ Nonetheless, in this case the matchmaking services are working by the following 
 2) After receiving a request from a player, reverse proxy will wrap this request into a "message" and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, reverse proxy just listening for a message in a mailbox with the appropriate request_id, which was set by it.
 3) One of the appropriate servers which is could process it, takes the message from the message queue. The processing node receives the request, and before its processing do subscribing on the messages with the player ID, that was specified in request.   
 **NOTE:** This step should be done only once when the player runned a game client, logged into system and runned a searching in the first time.
-4) Server adds a new asynchronous task in tasks pool (i.e. Celery with Python 3+) and after it, starts processing a new request.  
+4) Server adds a new asynchronous task in tasks pool (i.e. Celery with Python 3+) or delegate a task to an actor on the server (Elixir/Erlang actors, Skala with Akka framework and so on) and after it, starts processing a new request.  
 5) Doing business logic:  
   5.1. On of the existing worker is running an appropriate code that will do some useful work (building a leaderboard, searching a player/team).  
   5.2. If it will be necessary, this code could take same data from the storage which stores information about finished maches, players and so on. For instance, during activity of the player all data could be stored in NoSQL storage (like CouchDB, Mnesia, Redis, etc.) and any other data in some relational database (like PostgreSQL, MySQL, etc.).
@@ -75,7 +75,7 @@ It works almost in the same way as [without the Authentication / Authorization m
 6) Reverse proxy will wrap this request into a "message" and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, reverse proxy just listening for a message in a mailbox with the appropriate request_id, which was set by it.
 7) One of the appropriate servers which is could process it, takes the message from the message queue. The processing node receives the request, and before its processing do subscribing on the messages with the player ID, that was specified in request.   
 **NOTE:** This step should be done only once when the player runned a game client, logged into system and runned a searching in the first time.
-8) Server adds a new asynchronous task in tasks pool (i.e. Celery with Python 3+) and after it, starts processing a new request.  
+4) Server adds a new asynchronous task in tasks pool (i.e. Celery with Python 3+) or delegate a task to an actor on the server (Elixir/Erlang actors, Skala with Akka framework and so on) and after it, starts processing a new request.
 9) Doing business logic:  
   9.1. On of the existing worker is running an appropriate code that will do some useful work (building a leaderboard, searching a player/team).  
   9.2. If it will be necessary, this code could take same data from the storage which stores information about finished maches, players and so on. For instance, during activity of the player all data could be stored in NoSQL storage (like CouchDB, Mnesia, Redis, etc.) and any other data in some relational database (like PostgreSQL, MySQL, etc.).
