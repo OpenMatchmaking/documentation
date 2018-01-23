@@ -8,8 +8,8 @@
 - [**Components**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md)
   - [**Reverse proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#reverse-proxy) 
 - [**Matchmaking**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md)
-  - [**Distributing tasks for a search**]
-  - [**Strategies of a searching players**]
-  	- [**Elo-based**]
-  	- [**Average rating**]
-  	- [**Peformance-based selection**]
+  - [**Distributing tasks for a search**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#distributing-tasks-for-a-search)
+  - [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
+  	- [**Elo-based**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#elo-based)
+  	- [**Average rating**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#average-rating)
+  	- [**Peformance-based selection**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#peformance-based-selection)
