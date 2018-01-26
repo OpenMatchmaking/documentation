@@ -8,7 +8,6 @@ Each message is split onto three parts:
 - Token (Optional)
 
 ### Headers
-- Request ID - A unique identifier per each incoming request. Should be specified for any message, that passed into/taken from a message queue. Can be used as a response topic/queue name for a certain client.
 - Microservice name - A unique microservice name which is used for understanding which service should process this request.
 - Request URI - A string which is used to identify a resource.
 - Permissions - A list of permissions to resources. Optional.
@@ -24,7 +23,6 @@ Represent a unique JSON Web Token per each client for getting an access to micro
 ```javascript
 {
   "headers": {
-    "Request-ID": "6ed85c05-7302-402c-892c-1ae3f78ac355"
     "Microservice-Name": "matchmaking",
     "Request-URI": "/search-game/",
     "Permissions": "matchmaking.search.get; leaderboard.potg.get",
