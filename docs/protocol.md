@@ -40,11 +40,11 @@ Each prepared message for communicating betwee microservices contains two parts:
 - Content (Required)
 
 ### Headers
-- Microservice name - A unique microservice name which is used for understanding which service should process this request.
-- Request URI - A string which is used to identify a resource.
-- Permissions - A list of permissions to resources. Optional.
-- Event-Name - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
-- Token - A unique JSON Web Token per each client for getting an access to microservices functionality. Must be specified when the Authentication / Authorization layer for reverse proxy was enabled.
+- `Microservice-Name` - A unique microservice name which is used for understanding which service should process this request.
+- `Request-URI` - A string which is used to identify a resource.
+- `Permissions` - A list of permissions to resources. Optional.
+- `Event-Name` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
+- `Token` - A unique JSON Web Token per each client for getting an access to microservices functionality. Must be specified when the Authentication / Authorization layer for reverse proxy was enabled.
 
 ### Content
 Contains an information, that will be used for processing by one the existing microservices. If no data required, that left this field as an empty string.
