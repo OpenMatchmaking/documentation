@@ -4,12 +4,12 @@ The communication process between different microservices will be organized with
 
 ## Messages for clients
 Each incoming message should contain a couple of fields:
-- `url` - Represent a URL to a specific resource. Required.
-- `content` - Represents a message data for using by the certain microservice. Optional.
-- `token` - Represents a JSON Web Token as a string. Must be specified when the Authentication / Authorization layer for reverse proxy was enabled. Optional.
+- `url` - Represent a URL to a specific resource. Must be specified only request message. Required.
+- `content` - Represents a message data for using by the certain microservice. Can be specified in request and/or response messages. Optional.
+- `token` - Represents a JSON Web Token as a string. Must be specified when the Authentication / Authorization layer for reverse proxy was enabled. Can be specified only for request message. Optional.
 - `event-name` - Used for determining from which endpoint the response came. When isn't interested in response, set it to `null`. Optional.
 
-### Example of a incoming message
+### Example of a request from a client to a microservice
 ```javascript
 {
   "url": "api/v1/matchmaking/search"
@@ -18,6 +18,18 @@ Each incoming message should contain a couple of fields:
     "Game-Mode": "team-deathmatch"
   },
   "token": "a unique token"
+  "event-name": "find-opponents"
+}
+```
+
+### Example of a response from a microservice to a client 
+```javascript
+{
+  "content": {
+    "Server-IP": "127.0.0.1:5000",
+    "Access-Token": "Secret token"
+    "Team": "red"
+  },
   "event-name": "find-opponents"
 }
 ```
