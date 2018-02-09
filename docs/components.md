@@ -5,6 +5,7 @@ Here you can find a list of components which are сomposing the Open Matchmaking
 Summary
 -------
 - [**Reverse Proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#reverse-proxy)
+- 
 
 Reverse proxy
 ------------
@@ -35,3 +36,6 @@ Now, when you was get an idea what is it, let's see on the next scheme:
 - All entire structure of your project is hidden. Only one an entry point.
 - Slightly adjusting mappings between incoming requests and queues gives you a lot of ways to solve your task. 
 - Each inner part of your system don't need to connect to reverse proxy. All of them are working with message broker, and don't care about how the requests are coming into the queues.  
+
+Authorization / Authentication microservice
+-------------------------------------------
