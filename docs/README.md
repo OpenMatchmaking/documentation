@@ -7,6 +7,7 @@
   - [**Protocol**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/protocol.md)
 - [**Components**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md)
   - [**Reverse proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#reverse-proxy) 
+  - [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#authorization--authentication-microservice)
 - [**Matchmaking**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md)
   - [**Distributing tasks for a search**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#distributing-tasks-for-a-search)
   - [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
