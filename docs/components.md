@@ -41,7 +41,7 @@ Authorization / Authentication microservice
 -------------------------------------------
 ### Why 
 - Get an opportunity to restrict users, so that they can't send requests to microservices without required credentials and permissions.
-- Provide for developers the solution for cases when OpemMatchmaking should work with the dedicated authorization/authentication server, withot communicating with existing authorization/authentication servers.
+- Provide for developers the solution for cases when OpenMatchmaking should work with the dedicated authorization/authentication server, withot communicating with existing authorization/authentication servers.
 - Necessary to store an information about users and let them to get (or refresh) an access token.
 
 ### Benefits of using
