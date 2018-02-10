@@ -46,7 +46,7 @@ Authorization / Authentication microservice
 
 ### Benefits of using
 - Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#reverse-proxy)
-- A good choice for cases when OpenMatchmaking should work independently, without communicating with existing clouds of microservice (not related to OpenMatchmaking)
+- A good choice for cases when OpenMatchmaking should work independently, without communicating with other services (not related to OpenMatchmaking)
 
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
