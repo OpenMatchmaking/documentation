@@ -1,14 +1,6 @@
-# Componets
 
-Here you can find a list of components which are сomposing the Open Matchmaking platform.
+# Reverse proxy
 
-Summary
--------
-- [**Reverse Proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#reverse-proxy)
-- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#authorization--authentication-microservice)
-
-Reverse proxy
-------------
 ### Why 
 - Keep internal parts are hidden for a typical user, so that he still thinking that only works via WebSockets.
 - Isolate users from an access to a message broker.
@@ -36,25 +28,3 @@ Now, when you was get an idea what is it, let's see on the next scheme:
 - All entire structure of your project is hidden. Only one an entry point.
 - Slightly adjusting mappings between incoming requests and queues gives you a lot of ways to solve your task. 
 - Each inner part of your system don't need to connect to reverse proxy. All of them are working with message broker, and don't care about how the requests are coming into the queues.  
-
-Authorization / Authentication microservice
--------------------------------------------
-### Why 
-- Get an opportunity to restrict users, so that they can't send requests to microservices without required credentials and permissions.
-- Provide for developers the solution for cases when OpenMatchmaking should work with the dedicated authorization/authentication server, withot communicating with existing authorization/authentication servers.
-- Necessary to store an information about users and let them to get (or refresh) an access token.
-
-### Benefits of using
-- Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components.md#reverse-proxy)
-- A good choice for cases when OpenMatchmaking should work independently, without communicating with other services (not related to OpenMatchmaking)
-
-### API Endpoints
-| Method | Endpoint | Usage | Returns |
-|---|---|---|---|
-|   |   |   |   |
-
-Endpoint:
-URL:
-Description:
-Request parameters:
-Example of response:
