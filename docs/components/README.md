@@ -4,5 +4,5 @@ Here you can find a list of components which are сomposing the Open Matchmaking
 
 Summary
 -------
-- [**Reverse Proxy**]()
-- [**Authorization / Authentication microservice**]()
+- [**Reverse Proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/reverse-proxy.md#reverse-proxy)
+- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)

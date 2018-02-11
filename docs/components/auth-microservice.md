@@ -6,7 +6,7 @@
 - Necessary to store an information about users and let them to get (or refresh) an access token.
 
 ### Benefits of using
-- Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy]()
+- Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/reverse-proxy.md#reverse-proxy)
 - A good choice for cases when OpenMatchmaking should work independently, without communicating with other services (not related to OpenMatchmaking)
 
 ### API Endpoints
