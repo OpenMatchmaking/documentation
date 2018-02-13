@@ -14,7 +14,7 @@
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
-|GET     | /api/healthcheck         | Health check endpoint for API Gateways                     | - |
+|GET     | /api/health-check        | Health check endpoint for API Gateways                     | - |
 |POST    | /api/token               | Get an access token (or an access token and refresh token) | A new JSON Web Token |
 |GET     | /api/v1/users            | Get list of users                                          | Users |
 |POST    | /api/v1/users            | Create a new user                                          | User |
