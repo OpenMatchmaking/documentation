@@ -66,9 +66,8 @@ It works almost in the same way as [without the Authentication / Authorization m
 1) Client sends request to the Auth/Auth microservice and provides some required data (login/password, etc.) 
 2) An existing node takes the request, and started to processing it in the few steps:  
   2.1. Checks the credentials for a user. If they aren invalid - returns an error, otherwise going further.  
-  2.2. Generating a new token for the client. If before processing the request, token already exists, then return it.  
-  2.3. Selecting one of reverse proxy IPs from a table in a database with some algorithm (which is to pick it with taking into account the active load), to which our game client will be connected.  
-  2.4. Prepare the response for a client, that contains reverse proxy IP and access token.  
+  2.2. Generating a new token for the client.
+  2.3. Prepare the response for a client, that contains reverse proxy IP and access token.  
 3) Auth/Auth microservice returns the generated response to the game client.
 4) Game client is trying to establish a connection with one of reverse proxy instances, via getting an access to it through a load balancer that redirect to one of them on the first attempt of an access. If connection attempt was failed (reverse proxy node was shutdown or somehow disconnected from a cluster), then game client should pass 1-3 steps once again. Otherwise going further.
 5) Reverse proxy accepts connection with a client and checking the access token, that was specified by the connected client in request. If it invalid or expired, then returns an error. Otherwise increases the counter for an active users on the proxy server and updates the last time of accessing to the node, which are storing in the same database for Auth/Auth microservice.
