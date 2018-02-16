@@ -58,3 +58,8 @@
 |POST    | /api/auth/me         | Returns an information about the current user                     | User |
 |POST    | /api/auth/v1/users/game-client/register | Create a new user for the game client          | User |
 |POST    | /api/auth/v1/users/game-server/register | Create a new user for the game server          | User |
+
+### RabbitMQ queues
+| Queue name                | Usage                                        | Returns                  |
+|---------------------------|----------------------------------------------|--------------------------|
+|auth.microservices.register| Register a new microservice with permissions | "OK" or validation error |
