@@ -38,7 +38,7 @@
 |------------|------------|------------------|------------------------------------------------------------------|
 |id          | UUID       | PK               | A database unique object identifier                              |
 |codename    | VARCHAR    | NOT NULL         | A permission name in format "{microservice}.{resource}.{action}" |
-|description | Relation   |                  | Human-readable description about the permission                  |
+|description | VARCHAR    |                  | Human-readable description about the permission                  |
 
 #### Microservice table
 | Field name | Field type | Constraints      | Description                                  |
