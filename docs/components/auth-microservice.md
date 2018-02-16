@@ -52,5 +52,5 @@
 |POST    | /api/auth/verify     | Returns with whether or not a given access token is valid         | A token validation | result |
 |POST    | /api/auth/refresh    | Validates the refresh token, and provides back a new access token | A new JSON Web Token |
 |POST    | /api/auth/me         | Returns an information about the current user                     | User |
-|POST    | /api/v1/users/game-client/register | Create a new user for the game client               | User |
-|POST    | /api/v1/users/game-server/register | Create a new user for the game server               | User |
+|POST    | /api/autg/v1/users/game-client/register | Create a new user for the game client          | User |
+|POST    | /api/auth/v1/users/game-server/register | Create a new user for the game server          | User |
