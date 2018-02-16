@@ -14,12 +14,42 @@
   <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth-db.png"/>
 </p>
 
+#### User table
+| Field name | Field type | Constraints      | Description                         |
+|------------|------------|------------------|-------------------------------------|
+|id          | UUID       | PK               | A database unique object identifier |
+|username    | VARCHAR    | UNIQUE, NOT NULL | A unique username                   |
+|password    | VARCHAR    | NOT NULL         | User password hash                  |
+|group       | Relation   |                  | Many-To-Many Relationship to Group  |
+
+#### Group table
+| Field name | Field type | Constraints      | Description                             |
+|------------|------------|------------------|-----------------------------------------|
+|id          | UUID       | PK               | A database unique object identifier     |
+|name        | VARCHAR    | NOT NULL         | A permission group name                 |
+|permissions | Relation   |                  | Many-To-Many Relationship to Permission |
+
+#### Permission table
+| Field name | Field type | Constraints      | Description                                                      |
+|------------|------------|------------------|------------------------------------------------------------------|
+|id          | UUID       | PK               | A database unique object identifier                              |
+|codename    | VARCHAR    | NOT NULL         | A permission name in format "{microservice}.{resource}.{action}" |
+|description | Relation   |                  | Human-readable description about the permission                  |
+
+#### Microservice table
+| Field name | Field type | Constraints      | Description                                  |
+|------------|------------|------------------|----------------------------------------------|
+|id          | UUID       | PK               | A database unique object identifier          |
+|name        | VARCHAR    | UNIQUE, NOT NULL | A unique Microservice identifier             |
+|version     | VARCHAR    | NOT NULL         | Microservice version in format "{x}.{y}.{z}" |
+|permissions | Relation   |                  | One-To-Many Relationship to Permission       |
+
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
 |GET     | /api/health-check    | Health check endpoint for API Gateways                            | - |
 |POST    | /api/auth/token      | Get an access token (or an access token and refresh token)        | A new JSON Web Token |
-|POST    | /api/auth/verify     | Returns with whether or not a given access token is valid         | A token validation result |
+|POST    | /api/auth/verify     | Returns with whether or not a given access token is valid         | A token validation | result |
 |POST    | /api/auth/refresh    | Validates the refresh token, and provides back a new access token | A new JSON Web Token |
 |POST    | /api/auth/me         | Returns an information about the current user                     | User |
 |POST    | /api/v1/users/game-client/register | Create a new user for the game client               | User |
