@@ -14,6 +14,8 @@
   <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth-db.png"/>
 </p>
 
+**IMPORTANT**: The tables "Group", "Permission" and "Microservice" will be updated in the future by other microservice, that will be handling requests from inner microservices after their instantiating.
+
 #### User table
 | Field name | Field type | Constraints      | Description                         |
 |------------|------------|------------------|-------------------------------------|
@@ -28,6 +30,8 @@
 |id          | UUID       | PK               | A database unique object identifier     |
 |name        | VARCHAR    | NOT NULL         | A permission group name                 |
 |permissions | Relation   |                  | Many-To-Many Relationship to Permission |
+
+**NOTE**: On the first start of this microservice, the Group table should contain 2 groups without permissions if they aren't created yet: "Game client", "Game server". 
 
 #### Permission table
 | Field name | Field type | Constraints      | Description                                                      |
