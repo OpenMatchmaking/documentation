@@ -66,11 +66,11 @@ It works almost in the same way as [without the Authentication / Authorization m
 1) Client sends request to the Auth/Auth microservice and provides some required data (login/password, etc.) 
 2) An existing node takes the request, and started to processing it in the few steps:  
   2.1. Checks the credentials for a user. If they aren invalid - returns an error, otherwise going further.  
-  2.2. Generating a new token for the client.
+  2.2. Generating a new token for the client.  
   2.3. Prepare the response for a client return access token.
 3) Auth/Auth microservice returns the generated response to the game client.
 4) Game client is trying to establish a connection with one of reverse proxy instances, via getting an access to it through a load balancer that redirect to one of them on the first attempt of an access. If connection attempt was failed (reverse proxy node was shutdown or somehow disconnected from a cluster), then game client should pass 1-3 steps once again. Otherwise going further.
-5) Reverse proxy accepts connection with a client and checking the access token, that was specified by the connected client in request. If it invalid or expired, then returns an error. Otherwise, if it's valid then necessary send a requests for getting a list of permissions for a user and use it later for setting it up as a permission header for a message.
+5) Reverse proxy accepts connection with a client and checking the access token, that was specified by the connected client in request. If it invalid or expired, then returns an error. Otherwise, if it's valid then necessary to send a request for getting a list of permissions for the user and use it later for the setup a permission header for a message on the next step.
 6) Reverse proxy will wrap this request into a "message", set required headers and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, reverse proxy just listening for a message in a mailbox with the appropriate request_id, which was set by it.
 7) One of the appropriate servers which is could process it, takes the message from the message queue. The processing node receives the request, and before its processing do subscribing on the messages with the player ID, that was specified in request.   
 **NOTE:** This step should be done only once when the player runned a game client, logged into system and runned a searching in the first time.
