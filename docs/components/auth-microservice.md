@@ -4,6 +4,7 @@
 - Get an opportunity to restrict users, so that they can't send requests to microservices without required credentials and permissions.
 - Provide for developers the solution for cases when OpenMatchmaking should work with the dedicated authorization/authentication server, withot communicating with existing authorization/authentication servers.
 - Necessary to store an information about users and let them to get (or refresh) an access token.
+- Required a storage for microservices permissions, so that they can be assigned to each existing user
 
 ### Benefits of using
 - Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/reverse-proxy.md#reverse-proxy)
