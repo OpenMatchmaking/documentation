@@ -15,7 +15,7 @@
   <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth-db.png"/>
 </p>
 
-**IMPORTANT**: The tables "Group", "Permission" and "Microservice" will be updated in the future by other microservice, that will be handling requests from inner microservices after their instantiating.
+**IMPORTANT**: The tables "Group", "Permission" and "Microservice" will be updated by other part of microservice, that will be handling requests from inner microservices after their instantiating.
 
 #### User table
 | Field name | Field type | Constraints      | Description                         |
