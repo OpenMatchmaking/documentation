@@ -52,13 +52,13 @@
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
-|GET     | /api/health-check    | Health check endpoint for API Gateways                            | - |
-|POST    | /api/auth/token      | Get an access token (or an access token and refresh token)        | A new JSON Web Token |
-|POST    | /api/auth/verify     | Returns with whether or not a given access token is valid         | A token validation | result |
-|POST    | /api/auth/refresh    | Validates the refresh token, and provides back a new access token | A new JSON Web Token |
-|POST    | /api/auth/me         | Returns an information about the current user                     | User |
-|POST    | /api/auth/v1/users/game-client/register | Create a new user for the game client          | User |
-|POST    | /api/auth/v1/users/game-server/register | Create a new user for the game server          | User |
+|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | - |
+|POST    | /auth/api/token           | Get an access token (or an access token and refresh token)        | A new JSON Web Token |
+|POST    | /auth/api/verify          | Returns with whether or not a given access token is valid         | A token validation | result |
+|POST    | /auth/api/refresh         | Validates the refresh token, and provides back a new access token | A new JSON Web Token |
+|POST    | /auth/api/v1/users/me     | Returns an information about the current user                     | User |
+|POST    | /auth/api/v1/users/game-client/register | Create a new user for the game client               | User |
+|POST    | /auth/api/v1/users/game-server/register | Create a new user for the game server               | User |
 
 ### RabbitMQ queues
 | Queue name                | Usage                                        | Returns                  |
