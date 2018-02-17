@@ -32,7 +32,7 @@
 |name        | VARCHAR    | NOT NULL         | A permission group name                 |
 |permissions | Relation   |                  | Many-To-Many Relationship to Permission |
 
-**NOTE**: On the first start of this microservice, the Group table should contain 2 groups without permissions if they aren't created yet: "Game client", "Game server". 
+**NOTE**: On the first start of this microservice, the Group table should contain the following groups without permissions if they aren't created yet: "Game client". 
 
 #### Permission table
 | Field name | Field type | Constraints      | Description                                                      |
@@ -58,7 +58,6 @@
 |POST    | /auth/api/refresh         | Validates the refresh token, and provides back a new access token | A new JSON Web Token |
 |POST    | /auth/api/v1/users/me     | Returns an information about the current user                     | User |
 |POST    | /auth/api/v1/users/game-client/register | Create a new user for the game client               | User |
-|POST    | /auth/api/v1/users/game-server/register | Create a new user for the game server               | User |
 
 ### RabbitMQ queues
 | Queue name                | Usage                                        | Returns                  |
