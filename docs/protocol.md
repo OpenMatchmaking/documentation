@@ -40,11 +40,15 @@ Each prepared message for communicating betwee microservices contains two parts:
 - Content (Required)
 
 ### Headers
-- `Microservice-Name` - A unique microservice name which is used for understanding which service should process this request.
-- `Request-URI` - A string which is used to identify a resource.
-- `Permissions` - A list of permissions to resources. Optional.
-- `Event-Name` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
-- `Token` - A unique JSON Web Token per each client for getting an access to microservices functionality. Must be specified when the Authentication / Authorization layer for reverse proxy was enabled.
+- `microservice_name` - A unique microservice name which is used for understanding which service should process this request.
+- `request_url` - The original URL as a string which is used to identify a resource.
+- `permissions` - A list of permissions to resources splitted with the comma. Optional.
+- `request_source` - Specifies the source from which request was coming. Represented as the value of the `RequestSource` enum with the following values:
+  - `client` (or `0`) - Request comes from outside of Open Matchmaking platform. This value is set by reverse proxy, per each request from the client by default.
+  - `internal` (or `1`) - Request comes from an internal microservice of Open Matchmaking platform. Must be set by internal microservice-sender by default.
+- `content_type` - Specifies the data type in the message body. Default is `application/json`.
+- `reply_to` - A unique UUID4 identifier to an exclusive response client queue, to which necessary deliver a final response.
+- `correlation_id` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
 
 ### Content
 Contains an information, that will be used for processing by one the existing microservices. If no data required, that left this field as an empty string.
