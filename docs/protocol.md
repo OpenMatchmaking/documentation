@@ -40,13 +40,18 @@ Each prepared message for communicating betwee microservices contains two parts:
 - Content (Required)
 
 ### Headers
+Custom RabbitMQ headers:
 - `microservice_name` - A unique microservice name which is used for understanding which service should process this request.
 - `request_url` - The original URL as a string which is used to identify a resource.
-- `permissions` - A list of permissions to resources splitted with the comma. Optional.
+- `permissions` - A list of permissions to resources splitted with the comma.
 - `request_source` - Specifies the source from which request was coming. Represented as the value of the `RequestSource` enum with the following values:
   - `client` (or `0`) - Request comes from outside of Open Matchmaking platform. This value is set by reverse proxy, per each request from the client by default.
   - `internal` (or `1`) - Request comes from an internal microservice of Open Matchmaking platform. Must be set by internal microservice-sender by default.
+- `user_id` - A unique UUID identifier, generated and stored in Auth / Auth microservice per each user.
+
+Default RabbitMQ headers:
 - `content_type` - Specifies the data type in the message body. Default is `application/json`.
+- `delivery_mode` - Specified the delivery mode for the message. Set by reverse proxy to the `2` and means that the message must be `persisent` in terms of RabbitMQ.
 - `reply_to` - A unique UUID4 identifier to an exclusive response client queue, to which necessary deliver a final response.
 - `correlation_id` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
 
