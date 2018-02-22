@@ -64,7 +64,7 @@ As you can see on the picture, the microservice is communicating with three diff
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
-|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | - |
+|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
 |POST    | /auth/api/token/new       | Get an access token (or an access token and refresh token)        | A new JSON Web Token |
 |POST    | /auth/api/token/verify    | Returns with whether or not a given access token is valid         | A token validation | result |
 |POST    | /auth/api/token/refresh   | Validates the refresh token, and provides back a new access token | A new JSON Web Token |
