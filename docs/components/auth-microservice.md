@@ -10,12 +10,24 @@
 - Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/reverse-proxy.md#reverse-proxy)
 - A good choice for cases when OpenMatchmaking should work independently, without communicating with other services (not related to OpenMatchmaking)
 
+### General information
+General principles of auth/auth microservice can be shown with the following picture:
+
+<p align="center">
+  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth-schema.png"/>
+</p>
+
+As you can see on the picture, the microservice is communicating with three different entities with using storage as a database for a some data:
+- Game client is authenticating for getting an access and a refresh tokens  
+- Reverse proxy is going to use this microservice for verifying the given token from the game client and receiving a user data that will be used per each request before sending it to the certain message queue
+- Internal parts of Open Matchmaking which are communicating via specially created message queues for auth/auth microservice. It's a hidden part, a **don't provide** any public APIs for it. Only for internal usage
+
 ### Entity relationship diagram
 <p align="center">
   <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth-db.png"/>
 </p>
 
-**IMPORTANT**: The tables "Group", "Permission" and "Microservice" will be updated by other part of microservice, that will be handling requests from inner microservices after their instantiating.
+**IMPORTANT**: The tables "Group", "Permission" and "Microservice" will be updated by the other part of microservice, that will be handling requests from inner microservices after their instantiating.
 
 #### User table
 | Field name | Field type | Constraints      | Description                         |
