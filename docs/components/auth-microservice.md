@@ -72,6 +72,6 @@ As you can see on the picture, the microservice is communicating with three diff
 |POST    | /auth/api/v1/users/game-client/register | Create a new user for the game client               | User |
 
 ### RabbitMQ queues
-| Queue name                | Usage                                        | Returns                  |
-|---------------------------|----------------------------------------------|--------------------------|
-|auth.microservices.register| Register a new microservice with permissions | "OK" or validation error |
+| Queue name                | Exchange name           | Usage                                        | Returns                  |
+|---------------------------|-------------------------|----------------------------------------------|--------------------------|
+|auth.microservices.register| open-matchmaking.direct | Register a new microservice with permissions | "OK" or validation error |
