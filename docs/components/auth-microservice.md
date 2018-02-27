@@ -54,12 +54,12 @@ As you can see on the picture, the microservice is communicating with three diff
 |description | VARCHAR    |                  | Human-readable description about the permission                  |
 
 #### Microservice table
-| Field name | Field type | Constraints      | Description                                  |
-|------------|------------|------------------|----------------------------------------------|
-|id          | UUID       | PK               | A database unique object identifier          |
-|name        | VARCHAR    | UNIQUE, NOT NULL | A unique Microservice identifier             |
-|version     | VARCHAR    | NOT NULL         | Microservice version in format "{x}.{y}.{z}" |
-|permissions | Relation   |                  | One-To-Many Relationship to Permission       |
+| Field name | Field type | Constraints      | Description                                              |
+|------------|------------|------------------|----------------------------------------------------------|
+|id          | UUID       | PK               | A database unique object identifier                      |
+|name        | VARCHAR    | UNIQUE, NOT NULL | A unique Microservice identifier                         |
+|version     | VARCHAR    | NOT NULL         | Microservice version in format "{major}.{minor}.{patch}" |
+|permissions | Relation   |                  | One-To-Many Relationship to Permission                   |
 
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
