@@ -68,7 +68,7 @@ As you can see on the picture, the microservice is communicating with three diff
 |POST    | /auth/api/token/new       | Get an access token (or an access token and refresh token)        | A new JSON Web Token or a validation error |
 |POST    | /auth/api/token/verify    | Returns with whether or not a given access token is valid         | {"is_valid": true} or a validation error | result |
 |POST    | /auth/api/token/refresh   | Validates the refresh token, and provides back a new access token | A new JSON Web Token |
-|POST    | /auth/api/v1/users/me     | Returns an information about the current user                     | User |
+|GET     | /auth/api/v1/users/me     | Returns an information about the current user                     | User |
 |POST    | /auth/api/v1/users/game-client/register | Create a new user for the game client               | User or a validation error |
 
 ### RabbitMQ queues
