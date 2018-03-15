@@ -26,8 +26,9 @@ The demonstrated schema is pretty straightforward. For getting an idea how it sh
 2) The "message consumers" will extract a message from it and transmit it into certain queue for further processing, which is depends on the elo, specified in the incoming message. 
 3) Worker is trying to find a suitable player for a new game:  
   3.1. Because each worker is linked to the specific queue, it will extract message in sequence and try to analyze it. If the player, the information about which was specified in the message body, is according to the matchmaking algorithm, then the selected player will be saved in the memory of the worker and the extracted message deleted. This process is repeating until the worker have not enough players to fill the game lobby. And when it will completed, a list of players will be transferred as a message to the next queue.  
-  3.2. Otherwise the message will be returned the source queue for processing by an another worker.
-4) A worker is extracting the published message on the previous step, and creating a new game server (or choosing from one of existing). After that it will broadcast the server IP-address, port and connection credentials to each player mentioned in the list via particular response queues, that were specified by clients in the first step.
+  3.2. Otherwise the message will be published the special queue, created for requeuing players into generic queue.  
+  3.3. Special type of workers are re-publishing messages to the generic queue, which are coming from the publishing node from the 3.2 step.
+4) A worker is extracting the published message on the previous step, and creating a new game server (or choosing one from the already existing). After that it will broadcast the server IP-address, port and connection credentials to each player mentioned in the list via particular response queues, that were specified by clients in the first step.
 5) Each client is getting the response from response queue, connecting to the game lobby.
 
 So, as you can see the logic here is pretty simple. Why it was developed this way? The answer is obvious: to get the as much as possible efficient and scalable servers for processing incoming requests, so that each part can be scaled by your needs and expectations for your own game.
