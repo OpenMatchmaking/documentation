@@ -17,5 +17,5 @@
 | matchmaking.queues.lobbies        | open-matchmaking.  matchmaking.fanout | Prepares a game lobby for players and sends them invites into the game    | Connection details and credentials |
 | matchmaking.games.requeue         | open-matchmaking.  matchmaking.direct | Requeue the player into the certain queue                                 | - |
 
-P.S. `{player_type}` is the "pattern" means that instead of this substitution should be specified a string, as the part of the full queue name
+P.S. `{player_type}` is the "pattern" means that instead of this substitution should be specified a string, as the part of the full queue name  
 P.S.S. All queues, except the "matchmaking.games.search" are **internal**                       
