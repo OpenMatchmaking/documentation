@@ -5,8 +5,12 @@
 - [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
 
 ### Why
+- Necessary to have a separate microservice that processing requests related to searching players for a new match
+- It should scaling up depending on the current load
 
 ### Benefits of using
+- This microservice is independent and will be used only when it necessary to your project
+- Configuring used strategies for this microservice brings the flexibility in describing the expected behaviour
 
 ### RabbitMQ queues
 | Queue name                | Exchange name           | Usage                                      | Returns                          |
