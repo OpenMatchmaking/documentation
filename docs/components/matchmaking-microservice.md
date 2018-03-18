@@ -19,7 +19,7 @@
 | matchmaking.queues.generic        | open-matchmaking.  matchmaking.generic-queue.fanout | Extract the data about the player and send it to the next pipeline stage | - |
 | matchmaking.queues.{name}  | open-matchmaking.  matchmaking.{name}.fanout | Search opponents for a player with similar rating or a type               | - |              
 | matchmaking.queues.lobbies        | open-matchmaking.  matchmaking.lobby.fanout | Prepares a game lobby for players and sends them invites into the game    | Connection details and credentials |
-| matchmaking.games.requeue         | open-matchmaking.  matchmaking.direct | Requeue the player into the certain queue                                 | - |
+| matchmaking.games.requeue         | open-matchmaking.  matchmaking.requeue.direct | Requeue the player into the certain queue                                 | - |
 
 P.S. `{name}` is the "pattern" means that instead of this substitution should be specified a string, as the part of the full queue name  
 P.S.S. All queues, except the "matchmaking.games.search" are **internal**                       
