@@ -74,17 +74,17 @@ Example of the message content that will passed to the next stage:
 #### {Rating group} queue
 Handles the players and grouping them up into one game lobby, dependent on the used matchmaking algorithm. If processing node can't add the player to the certain game lobby, then requeueing the message for processing. Each message has the same format as for the generic queue.
 
-#### Queue for search retries / "Requeue" queue
-Stores the players as they were in certain matchmaking queues and put them into generic queue. Each message has the same format as for the generic/certain matchmaking queues.
-
 Each player, which is can be grouped up the players in one lobby, defined in the following format:
 ```javascript
 {
-    "0146563d-0f45-4062-90a7-b13a583defad",  // Player ID
-    "reply_to": "player-1-queue",            // Response queue (exracted from the message headers)
-    "event-name": "find-game"                // Event name (exracted from the message headers)
+    "id": "0146563d-0f45-4062-90a7-b13a583defad",  // Player ID
+    "reply_to": "player-1-queue",                  // Response queue (exracted from the message headers)
+    "event-name": "find-game"                      // Event name (exracted from the message headers)
 }
 ```
+
+#### Queue for search retries / "Requeue" queue
+Stores the players as they were in certain matchmaking queues and put them into generic queue. Each message has the same format as for the generic/certain matchmaking queues.
 
 #### Game lobby queue 
 Stores the prepared list of the players (which are splitted onto teams), that must be connected in one game to the game server. Creates a new game server (or getting one from the existing servers), a send the message to each client to connect to the certain server. 
@@ -127,7 +127,7 @@ Example of the message to each client:
     "ip": "127.0.0.1",
     "port": "9001"
     "credentials": {
-        ...             // Login with password, tokens and etc.
+        ...             // Login with password, tokens, etc.
     }
 }    
 ```
