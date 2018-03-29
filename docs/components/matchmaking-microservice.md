@@ -117,7 +117,8 @@ Example of incoming message:
             "event-name": "find-game"
         }
         ...   
-    ]
+    ],
+    ...
 }
 ```
 
@@ -125,7 +126,8 @@ Example of the message to each client:
 ```javascript
 {
     "ip": "127.0.0.1",
-    "port": "9001"
+    "port": "9001",
+    "team": "team 1",
     "credentials": {
         ...             // Login with password, tokens, etc.
     }
