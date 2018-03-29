@@ -34,6 +34,19 @@ Each incoming message should contain a couple of fields:
 }
 ```
 
+## Errors
+In the case of errors, the server must returns a list of error, so that the client could process the result response and somehow render or display the result of operation on the screen. The response body contains two required fields:
+- `errors` - List of objects, where each object is represented is specified in `{"title": "description"}` format.
+- `event-name` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
+
+### Example
+```javascript
+{
+  "errors": [{"Routing error": "The requested resource does not exist."}],
+  "event-name": "find-opponents"
+}
+```
+
 ## Messages for microservices
 Each prepared message for communicating betwee microservices contains two parts:
 - Headers (Required)
