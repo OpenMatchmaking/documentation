@@ -95,12 +95,12 @@ Example of incoming message:
     "team 1": [
         {
             "id": "0146563d-0f45-4062-90a7-b13a583defad",
-            "reply_to": "player-1-queue",
+            "response-queue": "player-1-queue",
             "event-name": "find-game"
         },
         { 
             "id": "a5d1d7a1-7b80-41fe-8bbc-441dba86a18a",
-            "reply_to": "player-2-queue",
+            "response-queue": "player-2-queue",
             "event-name": "find-game"
         }
         ...
@@ -108,12 +108,12 @@ Example of incoming message:
     "team 2": [
         { 
             "id": "56acbeb4-687d-4c8b-a881-0b9abdda64e4",
-            "reply_to": "player-7-queue",
+            "response-queue": "player-7-queue",
             "event-name": "find-game"
         },
         { 
             "id": "1b23b523-dd19-4a8c-8749-9b20588c962a",
-            "reply_to": "player-8-queue",
+            "response-queue": "player-8-queue",
             "event-name": "find-game"
         }
         ...   
@@ -125,11 +125,14 @@ Example of incoming message:
 Example of the message to each client:
 ```javascript
 {
-    "ip": "127.0.0.1",
-    "port": "9001",
-    "team": "team 1",
-    "credentials": {
-        ...             // Login with password, tokens, etc.
-    }
-}    
+    "content": {
+      "ip": "127.0.0.1",
+      "port": "9001",
+      "team": "team 1",
+      "credentials": {
+          ...             // Login with password, tokens, etc.
+      }
+    },
+    "event-name": "find-game"
+}
 ```
