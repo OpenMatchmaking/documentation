@@ -7,3 +7,4 @@ Summary
 - [**Reverse Proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/reverse-proxy.md#reverse-proxy)
 - [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
 - [**Matchmaking microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/matchmaking-microservice.md)
+- [**Strategist microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/strategist-microservice.md)
