@@ -19,7 +19,7 @@ This microservice is specialized on forming up the groups of players and buildin
 ### RabbitMQ queues
 | Queue name             | Exchange name                       | Usage                                             | Returns                         |
 |------------------------|-------------------------------------|---------------------------------------------------|---------------------------------|
-| strategist.match.сheck | open-matchmaking. strategist.fanout | Checks if the player can participate in the match | Updated list of grouped players |
+| strategist.match.сheck | open-matchmaking. strategist.check.fanout | Checks if the player can participate in the match | Updated list of grouped players |
 
 
 ### Messages
