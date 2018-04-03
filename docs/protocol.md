@@ -36,13 +36,18 @@ Each incoming message should contain a couple of fields:
 
 ## Errors
 In the case of errors, the server must returns a list of error, so that the client could process the result response and somehow render or display the result of operation on the screen. The response body contains two required fields:
-- `errors` - List of objects, where each object is represented is specified in `{"title": "description"}` format. The description of the error can be a string, list or dictionary type.
+- `error` - An object with two required fields:
+  - `type` - Specifies the error type. For example: `Forbiden` or `BadRequest`. 
+  - `details` - Contains the error description. Can be specified as a string, a list or a dictionary.
 - `event-name` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
 
 ### Example
 ```javascript
 {
-  "errors": [{"Routing error": "The requested resource does not exist."}],
+  "error": {
+      "type": "ValidationError"
+      "details": "The requested resource does not exist."}
+  ],
   "event-name": "find-opponents"
 }
 ```
