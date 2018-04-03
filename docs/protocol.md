@@ -47,7 +47,7 @@ In the case of errors, the server must returns a list of error, so that the clie
   "error": {
       "type": "ValidationError"
       "details": "The requested resource does not exist."}
-  ],
+  },
   "event-name": "find-opponents"
 }
 ```
