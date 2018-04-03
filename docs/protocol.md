@@ -71,7 +71,7 @@ Default RabbitMQ headers:
 - `content_type` - Specifies the data type in the message body. Default is `application/json`.
 - `delivery_mode` - Specified the delivery mode for the message. Set by reverse proxy to the `2` and means that the message must be `persisent` in terms of RabbitMQ.
 - `reply_to` - A unique UUID4 identifier to an exclusive response client queue, to which necessary deliver a final response.
-- `correlation_id` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return.
+- `correlation_id` - A string identifier for a response, with the help of which it is possible to understand from which microservice the response will return. if the client isn't intersted in the response, then set it to `"null"`
 
 ### Content
 Contains an information, that will be used for processing by one the existing microservices. If no data required, that left this field as an empty string.
