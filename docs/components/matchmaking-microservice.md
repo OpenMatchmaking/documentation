@@ -39,7 +39,7 @@ Example of the message content that will passed to the next stage:
   "id": "0146563d-0f45-4062-90a7-b13a583defad",     // Player ID (extracted from the message headers, `user_id`)
   "reply_to": "player-1-queue",                     // Response queue (exracted from the message headers, `reply_to`)
   "event-name": "find-game",                        // Event name (exracted from the message headers, `correlation_id`)
-  "player": {                                       // Contains the data extracted from the remote storage
+  "detail": {                                       // Contains the data extracted from the remote storage
     "rating": 2680,
     "content": {
       "id": "0146563d-0f45-4062-90a7-b13a583defad",
@@ -69,7 +69,7 @@ Example of the message content that will passed to the next stage:
   "id": "0146563d-0f45-4062-90a7-b13a583defad",
   "reply_to": "player-1-queue",
   "event-name": "find-game",
-  "player": {                                       
+  "detail": {                                       
     "rating": 2680,
     "content": {
       "id": "0146563d-0f45-4062-90a7-b13a583defad",
