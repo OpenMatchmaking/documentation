@@ -75,6 +75,7 @@ Example of the response:
 ```javascript
 {
   "added": true,
+  "is_filled": false,
   "grouped-players": {    
     "team 1": [
       {
@@ -109,3 +110,4 @@ Example of the response:
   }
 }
 ```
+The `is_filled` field as the boolean flag means that the teams are filled and this data can be user for creating a new game lobby.
