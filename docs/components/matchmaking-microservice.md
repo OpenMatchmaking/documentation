@@ -220,5 +220,5 @@ Example of the message to each client:
 ```
 
 #### Queue for requests to cancel searching a new game
-This queue is used for cancelling the search process a new game for the player. Regardless of the actual state of the player in the search queue returns the "OK" in the response body.
-All what is necessary to cancel the search process is to specify the "user_id" header with the UUID4 of the player. Any data, specified in the body of the request will be ignored and won't be used.
+This queue is used for cancelling the search process a new game for the player. Regardless of the actual state of the player in the search queue returns the `"OK"` in the response body.  
+All what is necessary to cancel the search process is to specify the `user_id` header with the UUID4 of the player. Any data, specified in the body of the request will be ignored and won't be used.
