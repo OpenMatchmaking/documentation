@@ -13,16 +13,17 @@
 - Configuring used strategies for this microservice brings the flexibility in describing the expected behaviour
 
 ### RabbitMQ queues
-| Queue name                | Exchange name           | Usage                                      | Returns                          |
-|---------------------------|-------------------------|--------------------------------------------|----------------------------------|
-| matchmaking.games.search  | open-matchmaking.direct | An entry point for searching a game with opponents | Validation error if was found. Otherwise passes the message to the "matchmaking.queue.generic" queue | No |
-| matchmaking.queues.generic        | open-matchmaking.  matchmaking.generic-queue.fanout | Extract the data about the player and send it to the next pipeline stage | - |
-| matchmaking.queues.{name}  | open-matchmaking.  matchmaking.{name}.fanout | Search opponents for a player with similar rating or a type               | - |              
-| matchmaking.queues.lobbies        | open-matchmaking.  matchmaking.lobby.fanout | Prepares a game lobby for players and sends them invites into the game    | Connection details and credentials |
-| matchmaking.games.requeue         | open-matchmaking.  matchmaking.requeue.direct | Requeue the player into the certain queue                                 | - |
+| Queue name                       | Exchange name           | Usage                                      | Returns                          |
+|----------------------------------|-------------------------|--------------------------------------------|----------------------------------|
+| matchmaking.games.search         | open-matchmaking.direct | An entry point for searching a game with opponents | Validation error if was found. Otherwise passes the message to the "matchmaking.queue.generic" queue | No |
+| matchmaking.queues.generic       | open-matchmaking.  matchmaking.generic-queue.fanout | Extract the data about the player and send it to the next pipeline stage | - |
+| matchmaking.queues.{name}        | open-matchmaking.  matchmaking.{name}.fanout | Search opponents for a player with similar rating or a type                     | - |              
+| matchmaking.queues.lobbies       | open-matchmaking.  matchmaking.lobby.fanout | Prepares a game lobby for players and sends them invites into the game           | Connection details and credentials |
+| matchmaking.games.requeue        | open-matchmaking.  matchmaking.requeue.direct | Requeue the player into the certain queue                                      | - |
+| matchmaking.games.search.cancel  | open-matchmaking.direct | Cancel the searching a game for the player                                                           | "OK" |
 
 P.S. `{name}` is the "pattern" means that instead of this substitution should be specified a string, as the part of the full queue name  
-P.S.S. All queues, except the "matchmaking.games.search" are **internal**                       
+P.S.S. All queues, except the `matchmaking.games.search` and `matchmaking.games.search.cancel` are **internal**               
 
 ### Messages
 Because our microservice works with messages, we're expecting that each message will be with fixed amount of fields and will be defined in the concrete format, so that it will be possible to implement any desirable algorightm that will process the messages and will connect the players in one game lobby later.
@@ -217,3 +218,7 @@ Example of the message to each client:
   "event-name": "find-game"
 }
 ```
+
+#### Queue for requests to cancel searching a new game
+This queue is used for cancelling the search process a new game for the player. Regardless of the actual state of the player in the search queue returns the "OK" in the response body.
+All what is necessary to cancel the search process is to specify the "user_id" header with the UUID4 of the player. Any data, specified in the body of the request will be ignored and won't be used.
