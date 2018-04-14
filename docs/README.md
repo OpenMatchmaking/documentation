@@ -10,6 +10,7 @@
   - [**Strategist microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/strategist-microservice.md)
 - [**Matchmaking**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md)
   - [**Distributing tasks for a search**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#distributing-tasks-for-a-search)
+  - [**Saving the worker state**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#saving-the-worker-state)
   - [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
   	- [**Elo-based**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#elo-based)
   	- [**Average rating**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#average-rating)

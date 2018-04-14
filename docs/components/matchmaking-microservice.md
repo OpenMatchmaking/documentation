@@ -2,6 +2,7 @@
 
 ### Additional info
 - [**Distributing tasks for a search**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#distributing-tasks-for-a-search)
+- [**Saving the worker state**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#saving-the-worker-state)
 - [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
 
 ### Why
