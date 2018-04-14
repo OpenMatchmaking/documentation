@@ -33,6 +33,29 @@ The demonstrated schema is pretty straightforward. For getting an idea how it sh
 
 So, as you can see the logic here is pretty simple. Why it was developed this way? The answer is obvious: to get the as much as possible efficient and scalable servers for processing incoming requests, so that each part can be scaled by your needs and expectations for your own game.
 
+Saving the worker state
+-----------------------
+Because each worker is using its own state for saving a list of the grouped players with a similar rating or a skill, we must be ensured that even in failure of the processing node the state will be reused and the data won't be lost. In the case when we aren't using any storage for saving the worker state, it is really important to understand that under the highload the node in the cluster can start and shutdown constantly what is leading to losing all processed data.
+
+For dealing with this particular issue each existing worker will be store its state in the external storage (for example, it can be a RDBMS or a NoSQL solution), which is must provide high availability and fault tolerance features. In general the using of the "shared state" by workers is pretty straightforward:
+
+1. Is initializing by the following schema:  
+  1.1. It's trying to get one of the possible states with the data from the external storage. If it wasn't found, then the worker starts with an empty state. 
+  1.2. Starts the periodic task in background for saving the state in the external storage as is each 5 seconds.  
+2. Does a required amount of work and saving the result in the inner state as the part of worker after each successful processing.
+
+This solution brings to us the next advantages:
+
+- Easier to build the system with concurrency, because each worker can switch between different states atomically and replace the failured node when it happens.
+- Reduces the waiting time per each player, because the worker can return to the partially prepared group of players more often. 
+- The cluster becomes more stable and less prone to data loss.
+
+But, of course, it have some disadvantages as well:
+
+- Harder to implement the desired behaviour with concurrency support
+- Increases a maintaining cost and required time for preparing a working environment
+- Adds additional network delays during the work
+
 Strategies of a searching players
 ---------------------------------
 In general it is a complex task to solving that doesn't have a single solution, because you will need to analize a lot of active players, so that each player would be picked and placed in equal conditions with others players. All players which are playing a match on the game server must have close same game skills or levels, so that each player (or a team) have the close chances for a win and a defeat.
