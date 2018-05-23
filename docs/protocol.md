@@ -12,12 +12,12 @@ Each incoming message should contain a couple of fields:
 ### Example of a request from a client to a microservice
 ```javascript
 {
-  "url": "api/v1/matchmaking/search"
+  "url": "api/v1/matchmaking/search",
   "content": {
     "Player-ID": "0146563d-0f45-4062-90a7-b13a583defad",
     "Game-Mode": "team-deathmatch"
   },
-  "token": "a unique token"
+  "token": "a unique token",
   "event-name": "find-opponents"
 }
 ```
@@ -27,7 +27,7 @@ Each incoming message should contain a couple of fields:
 {
   "content": {
     "Server-IP": "127.0.0.1:5000",
-    "Access-Token": "Secret token"
+    "Access-Token": "Secret token",
     "Team": "red"
   },
   "event-name": "find-opponents"
@@ -45,8 +45,8 @@ In the case of errors, the server must returns a list of error, so that the clie
 ```javascript
 {
   "error": {
-      "type": "ValidationError"
-      "details": "The requested resource does not exist."}
+      "type": "ValidationError",
+      "details": "The requested resource does not exist."
   },
   "event-name": "find-opponents"
 }
