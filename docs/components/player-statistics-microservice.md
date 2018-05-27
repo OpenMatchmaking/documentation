@@ -23,5 +23,5 @@ This microservice is specialized on storing statistics data per for each existin
 | Queue name                      | Exchange name                               | Usage                              | Returns                         |
 |---------------------------------|---------------------------------------------|------------------------------------|---------------------------------|
 | player-stats.statistic.init     | open-matchmaking.player-stats.statistic.init.fanout     | Initializes statistics from an empty state         | Statistics or a validation error |
-| player-stats.statistic.retrieve | open-matchmaking.player-stats.statistic.retrieve.fanout | Get the player statistics    | Statistics or a validation error |
-| player-stats.statistic.update   | open-matchmaking.player-stats.statistic.update.fanout   | Updatd the player statistics | Statistics or a validation error |
+| player-stats.statistic.retrieve | open-matchmaking.player-stats.statistic.retrieve.fanout | Returns the player statistics    | Statistics or a validation error |
+| player-stats.statistic.update   | open-matchmaking.player-stats.statistic.update.fanout   | Updates the player statistics | Statistics or a validation error |
