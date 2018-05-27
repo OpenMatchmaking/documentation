@@ -9,6 +9,7 @@
   - [**Matchmaking microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/matchmaking-microservice.md)
   - [**Strategist microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/strategist-microservice.md)
   - [**Game servers pool**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/game-servers-pool.md)
+  - [**Player statistics microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/player-statistics-microservice.md)
 - [**Matchmaking**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md)
   - [**Distributing tasks for a search**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#distributing-tasks-for-a-search)
   - [**Saving the worker state**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#saving-the-worker-state)
