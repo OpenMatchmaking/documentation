@@ -19,9 +19,11 @@ This microservice is specialized on storing statistics data per for each existin
 | wins            | Integer    | NOT NULL    | Total number of games when the player won          |
 | loses           | Integer    | NOT NULL    | Total number of games when the player was defeated |
 
+Also the table can have an extra fields in database (for example, extra columns/documents in NoSQL or a nested JSON/HStore field in RDBMS) that can be used for providing for a detail information about the player.
+
 ### RabbitMQ queues
 | Queue name                      | Exchange name                               | Usage                              | Returns                         |
 |---------------------------------|---------------------------------------------|------------------------------------|---------------------------------|
-| player-stats.statistic.init     | open-matchmaking.player-stats.statistic.init.fanout     | Initializes statistics from an empty state         | Statistics or a validation error |
+| player-stats.statistic.init     | open-matchmaking.player-stats.statistic.init.fanout     | Initializes statistics from an empty state for the new player    | Statistics or a validation error |
 | player-stats.statistic.retrieve | open-matchmaking.player-stats.statistic.retrieve.fanout | Returns the player statistics    | Statistics or a validation error |
 | player-stats.statistic.update   | open-matchmaking.player-stats.statistic.update.fanout   | Updates the player statistics | Statistics or a validation error |
