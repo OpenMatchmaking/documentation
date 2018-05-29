@@ -18,6 +18,7 @@ This microservice is specialized on storing statistics data per for each existin
 | games           | Integer    | NOT NULL    | Total number of games played                       |
 | wins            | Integer    | NOT NULL    | Total number of games when the player won          |
 | loses           | Integer    | NOT NULL    | Total number of games when the player was defeated |
+| rating          | Integer    | NOT NULL    | An actual rating of the player                     |
 
 Also the table can have an extra fields in database (for example, extra columns/documents in NoSQL or a nested JSON/HStore field in RDBMS) that can be used for providing for a detail information about the player.
 
