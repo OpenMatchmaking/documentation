@@ -14,7 +14,7 @@ This microservice is specialized on storing statistics data per for each existin
 #### Statistic table
 | Field name      | Field type | Constraints | Description                                |
 |-----------------|------------|-------------|--------------------------------------------|
-| id              | UUID       | PK          | A database unique object identifier (same as in Authorization / Authentication microservice) |
+| player_id       | UUID       | PK          | A database unique object identifier (same as in Authorization / Authentication microservice) |
 | games           | Integer    | NOT NULL    | Total number of games played                       |
 | wins            | Integer    | NOT NULL    | Total number of games when the player won          |
 | loses           | Integer    | NOT NULL    | Total number of games when the player was defeated |
