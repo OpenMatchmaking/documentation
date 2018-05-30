@@ -3,6 +3,7 @@
 - [**Architecture**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md)
   - [**How it works**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#how-it-works)
   - [**Protocol**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/protocol.md)
+  - [**Default exchanges and queues**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/default-queues-and-exchanges.md)
 - [**Components**](https://github.com/OpenMatchmaking/documentation/tree/master/docs/components#componets)
   - [**Reverse proxy**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/reverse-proxy.md) 
   - [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
