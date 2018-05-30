@@ -16,11 +16,16 @@ This microservice is specialized on forming up the groups of players and buildin
 - Can be scaled independently from other microservice
 - A minimal overhead on intergrating different microservices
 
-### RabbitMQ queues
-| Queue name             | Exchange name                       | Usage                                             | Returns                         |
-|------------------------|-------------------------------------|---------------------------------------------------|---------------------------------|
-| strategist.match.сheck | open-matchmaking. strategist.check.fanout | Checks if the player can participate in the match | Updated list of grouped players |
+### RabbitMQ exchanges and queues 
+#### Exchanges
+| Exchange name                            | Exchange type | Options                                        |
+|------------------------------------------|---------------|------------------------------------------------| 
+| open-matchmaking.strategist.check.direct | direct        | durable=True, passive=False, auto_delete=False |
 
+#### Queues
+| Queue name             | Queue options                                                   | Exchange name                            | Usage                                             | Returns                         |
+|------------------------|-----------------------------------------------------------------|------------------------------------------|---------------------------------------------------|---------------------------------|
+| strategist.match.сheck | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.strategist.check.direct | Checks if the player can participate in the match | Updated list of grouped players |
 
 ### Messages
 Because our microservice works with messages, we're expecting that each message will be with fixed amount of fields and will be defined in the concrete format, so that it will be possible to implement any desirable algorightm that will process the messages and will connect the players in one game lobby later.

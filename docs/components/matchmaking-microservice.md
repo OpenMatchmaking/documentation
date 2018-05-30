@@ -13,15 +13,24 @@
 - This microservice is independent and will be used only when it necessary to your project
 - Configuring used strategies for this microservice brings the flexibility in describing the expected behaviour
 
-### RabbitMQ queues
-| Queue name                       | Exchange name           | Usage                                      | Returns                          |
-|----------------------------------|-------------------------|--------------------------------------------|----------------------------------|
-| matchmaking.games.search         | open-matchmaking.direct | An entry point for searching a game with opponents | Validation error if was found. Otherwise passes the message to the "matchmaking.queue.generic" queue | No |
-| matchmaking.queues.generic       | open-matchmaking.  matchmaking.generic-queue.fanout | Extract the data about the player and send it to the next pipeline stage | - |
-| matchmaking.queues.{name}        | open-matchmaking.  matchmaking.{name}.fanout | Search opponents for a player with similar rating or a type                     | - |              
-| matchmaking.queues.lobbies       | open-matchmaking.  matchmaking.lobby.fanout | Prepares a game lobby for players and sends them invites into the game           | Connection details and credentials |
-| matchmaking.games.requeue        | open-matchmaking.  matchmaking.requeue.direct | Requeue the player into the certain queue                                      | - |
-| matchmaking.games.search.cancel  | open-matchmaking.direct | Cancel the searching a game for the player                                                           | "OK" |
+### RabbitMQ exchanges and queues 
+#### Exchanges
+| Exchange name                                     | Exchange type | Options                                        |
+|---------------------------------------------------|---------------|------------------------------------------------| 
+| open-matchmaking.matchmaking.generic-queue.direct | direct        | durable=True, passive=False, auto_delete=False |
+| open-matchmaking.matchmaking.{name}.direct        | direct        | durable=True, passive=False, auto_delete=False |
+| open-matchmaking.matchmaking.lobby.direct         | direct        | durable=True, passive=False, auto_delete=False |
+| open-matchmaking.matchmaking.requeue.direct       | direct        | durable=True, passive=False, auto_delete=False |
+
+#### Queues
+| Queue name                      | Queue options                                                   | Exchange name                                     | Usage                                                                    | Returns                                                                                              |
+|---------------------------------|-----------------------------------------------------------------|---------------------------------------------------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| matchmaking.games.search        | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct                           | An entry point for searching a game with opponents                       | Validation error if was found. Otherwise passes the message to the "matchmaking.queue.generic" queue |
+| matchmaking.queues.generic      | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.matchmaking.generic-queue.direct | Extract the data about the player and send it to the next pipeline stage | -                                                                                                    |
+| matchmaking.queues.{name}       | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.matchmaking.{name}.direct        | Search opponents for a player with similar rating or a type              | -                                                                                                    |
+| matchmaking.queues.lobbies      | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.matchmaking.lobby.direct         | Prepares a game lobby for players and sends them invites into the game   | Connection details and credentials                                                                   |
+| matchmaking.games.requeue       | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.matchmaking.requeue.direct       | Requeue the player into the certain queue                                | -                                                                                                    |
+| matchmaking.games.search.cancel | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct                           | Cancel the searching a game for the player                               | "OK"                                                                                                 |
 
 P.S. `{name}` is the "pattern" means that instead of this substitution should be specified a string, as the part of the full queue name  
 P.S.S. All queues, except the `matchmaking.games.search` and `matchmaking.games.search.cancel` are **internal**               

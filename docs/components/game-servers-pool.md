@@ -21,11 +21,12 @@
 | credentials     | JSON       | NOT NULL    | The data used for connecting to the server |
 | game_mode       | VARCHAR    | NOT NULL    | Type of served games                       |
 
-### RabbitMQ queues
-| Queue name                        | Exchange name           | Usage                                    | Returns                                  |
-|-----------------------------------|-------------------------|------------------------------------------|------------------------------------------|
-| game-servers-pool.server.register | open-matchmaking.direct | Register a new game server               | A unique server ID or a validation error |
-| game-servers-pool.server.retrieve | open-matchmaking.direct | Get a server with credentials to connect | Server with credentials                  |
+### RabbitMQ exchanges and queues 
+#### Queues
+| Queue name                        | Queue options                                                   | Exchange name           | Usage                                    | Returns                                  |
+|-----------------------------------|-----------------------------------------------------------------|-------------------------|------------------------------------------|------------------------------------------|
+| game-servers-pool.server.register | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Register a new game server               | A unique server ID or a validation error |
+| game-servers-pool.server.retrieve | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Get a server with credentials to connect | Server with credentials                  |
 
 ### Request and response examples
 
