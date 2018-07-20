@@ -23,6 +23,10 @@ References
 - [PyCon Ireland 2011, Demonware, Damien Marshall - Keynote speech: Using Python at Demonware](https://vimeo.com/31781454)
 - [Dave Kuhlman - Multiprocessing in Python: a guided tour with examples](http://www.davekuhlman.org/python_multiprocessing_01.html#erlang-erlport-python)
 - [GDC 2016, Activision, Josh Menke - Skill, Matchmaking, and Ranking Systems Design](https://www.youtube.com/watch?v=-pglxege-gU)
+- GDC 2017, Twitch Interactive, Mario Izquierdo - Math for Game Programmers: Ranking Systems: Elo, TrueSkill and Your Own
+  - [Slides](https://www.gdcvault.com/play/1024487/Math-for-Game-Programmers-Ranking)
+- GDC 2018, 343 Industries, Josh Menke - Significantly Improving Your Skill System with TrueSkill through Time
+  - [Slides](https://www.gdcvault.com/play/1025425/Significantly-Improving-Your-Skill-System)
 
 License
 -------
