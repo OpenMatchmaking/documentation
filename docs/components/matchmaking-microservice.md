@@ -13,6 +13,12 @@
 - This microservice is independent and will be used only when it necessary to your project
 - Configuring used strategies for this microservice brings the flexibility in describing the expected behaviour
 
+### Dependencies
+- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
+- [**Player statistics microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/player-statistics-microservice.md)
+- [**Strategist microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/strategist-microservice.md)
+- [**Game servers pool**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/game-servers-pool.md)
+
 ### RabbitMQ exchanges and queues 
 #### Exchanges
 | Exchange name                                     | Exchange type | Options                                        |
