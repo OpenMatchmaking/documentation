@@ -10,6 +10,9 @@
 - Game server only registers or updates the existing information about itself
 - Can be independently scaled up 
 
+### Dependencies
+- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
+
 ### Entity relationship diagram
 #### Server table
 | Field name      | Field type | Constraints | Description                                |
