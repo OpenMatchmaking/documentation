@@ -16,6 +16,9 @@ This microservice is specialized on forming up the groups of players and buildin
 - Can be scaled independently from other microservice
 - A minimal overhead on intergrating different microservices
 
+### Dependencies
+- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
+
 ### RabbitMQ exchanges and queues 
 #### Exchanges
 | Exchange name                            | Exchange type | Options                                        |
