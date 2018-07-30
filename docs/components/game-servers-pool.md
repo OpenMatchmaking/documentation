@@ -43,7 +43,7 @@ Request:
   "credentials": {
       "token": "secret_token"
   },
-  "game_mode": "team-deathmatch",
+  "game_mode": "team-deathmatch"
 }
 ```
 
