@@ -43,7 +43,7 @@ Request:
   "credentials": {
       "token": "secret_token"
   },
-  "game_mode": "team-deathmatch"
+  "game-mode": "team-deathmatch"
 }
 ```
 
@@ -77,8 +77,8 @@ Request:
 {
   "url": "api/v1/game-servers-pool/retrieve",
   "content": {
-    "required_slots": 10,
-    "game_mode": "team-deathmatch"
+    "required-slots": 10,
+    "game-mode": "team-deathmatch"
   },
   "token": "a unique token",
   "event-name": "get-server"
@@ -87,8 +87,8 @@ Request:
 - Between microservices
 ```json
 {
-  "required_slots": 10,
-  "game_mode": "team-deathmatch"
+  "required-slots": 10,
+  "game-mode": "team-deathmatch"
 }
 ```
 
@@ -112,7 +112,7 @@ Response (error):
   "error": {
       "type": "ValidationError",
       "details": {
-          "required_slots": ["Field can't be null."]
+          "required-slots": ["Field can't be null."]
       }
   },
   "event-name": "get-server"
