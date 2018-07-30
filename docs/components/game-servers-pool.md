@@ -39,7 +39,7 @@ Request:
 {
   "host": "127.0.0.1",
   "port": "5000",
-  "available_slots": 100,
+  "available-slots": 100,
   "credentials": {
       "token": "secret_token"
   },
