@@ -104,69 +104,72 @@ Handles the players and grouping them up into one game lobby, dependent on the u
 Example of the data with the grouped players in one match:
 ```javascript
 {
-  "team 1": [
-    {
-      "id": "0146563d-0f45-4062-90a7-b13a583defad",
-      "response-queue": "player-1-queue",                   
-      "event-name": "find-game",
-      "detail": {
-        "rating": 2680,
-        "content": {
-            "id": "0146563d-0f45-4062-90a7-b13a583defad",
-            "games": 531,
-            "wins": 279,
-            ...
+  "teams": {
+    "team 1": [
+      {
+        "id": "0146563d-0f45-4062-90a7-b13a583defad",
+        "response-queue": "player-1-queue",                   
+        "event-name": "find-game",
+        "detail": {
+          "rating": 2680,
+          "content": {
+              "id": "0146563d-0f45-4062-90a7-b13a583defad",
+              "games": 531,
+              "wins": 279,
+              ...
+          }
+        }
+      },
+      { 
+        "id": "a5d1d7a1-7b80-41fe-8bbc-441dba86a18a",
+        "response-queue": "player-2-queue",
+        "event-name": "find-game",
+        "detail": {
+          "rating": 2721,
+          "content": {
+              "id": "a5d1d7a1-7b80-41fe-8bbc-441dba86a18a",
+              "games": 150,
+              "wins": 72,
+              ...
+          }
         }
       }
-    },
-    { 
-      "id": "a5d1d7a1-7b80-41fe-8bbc-441dba86a18a",
-      "response-queue": "player-2-queue",
-      "event-name": "find-game",
-      "detail": {
-        "rating": 2721,
-        "content": {
-            "id": "a5d1d7a1-7b80-41fe-8bbc-441dba86a18a",
-            "games": 150,
-            "wins": 72,
-            ...
+      ...
+    ],
+    "team 2": [
+      { 
+        "id": "56acbeb4-687d-4c8b-a881-0b9abdda64e4",
+        "response-queue": "player-7-queue",
+        "event-name": "find-game",
+        "detail": {
+          "rating": 2705,
+          "content": {
+              "id": "56acbeb4-687d-4c8b-a881-0b9abdda64e4",
+              "games": 61,
+              "wins": 35,
+              ...
+          }
+        }
+      },
+      { 
+        "id": "1b23b523-dd19-4a8c-8749-9b20588c962a",
+        "response-queue": "player-8-queue",
+        "event-name": "find-game",
+        "detail": {
+          "rating": 2783,
+          "content": {
+              "id": "1b23b523-dd19-4a8c-8749-9b20588c962a",
+              "games": 221,
+              "wins": 127,
+              ...
+          }
         }
       }
-    }
+      ...
+    ],
     ...
-  ],
-  "team 2": [
-    { 
-      "id": "56acbeb4-687d-4c8b-a881-0b9abdda64e4",
-      "response-queue": "player-7-queue",
-      "event-name": "find-game",
-      "detail": {
-        "rating": 2705,
-        "content": {
-            "id": "56acbeb4-687d-4c8b-a881-0b9abdda64e4",
-            "games": 61,
-            "wins": 35,
-            ...
-        }
-      }
-    },
-    { 
-      "id": "1b23b523-dd19-4a8c-8749-9b20588c962a",
-      "response-queue": "player-8-queue",
-      "event-name": "find-game",
-      "detail": {
-        "rating": 2783,
-        "content": {
-            "id": "1b23b523-dd19-4a8c-8749-9b20588c962a",
-            "games": 221,
-            "wins": 127,
-            ...
-        }
-      }
-    }
-    ...
-  ],
-  ...
+  }
+  "game-mode": "team-deathmatch"
 }
 ```
 From the some point of view it is a denormalized data, which is have a sense for us, because all of those data can be used for handling special cases, balancing players for the match and so on. The data time-to-time will be written to the external storage for make it durable and sustainable to sudden fails.
@@ -190,33 +193,36 @@ Stores the prepared list of the players (which are splitted onto teams), that mu
 Example of the incoming message:
 ```javascript
 {
-  "team 1": [
-    {
-      "id": "0146563d-0f45-4062-90a7-b13a583defad",
-      "response-queue": "player-1-queue",
-      "event-name": "find-game"
-    },
-    { 
-      "id": "a5d1d7a1-7b80-41fe-8bbc-441dba86a18a",
-      "response-queue": "player-2-queue",
-      "event-name": "find-game"
-    }
+  "teams": {
+    "team 1": [
+      {
+        "id": "0146563d-0f45-4062-90a7-b13a583defad",
+        "response-queue": "player-1-queue",
+        "event-name": "find-game"
+      },
+      { 
+        "id": "a5d1d7a1-7b80-41fe-8bbc-441dba86a18a",
+        "response-queue": "player-2-queue",
+        "event-name": "find-game"
+      }
+      ...
+    ],
+    "team 2": [
+      { 
+        "id": "56acbeb4-687d-4c8b-a881-0b9abdda64e4",
+        "response-queue": "player-7-queue",
+        "event-name": "find-game"
+      },
+      { 
+        "id": "1b23b523-dd19-4a8c-8749-9b20588c962a",
+        "response-queue": "player-8-queue",
+        "event-name": "find-game"
+      }
+      ...
+    ],
     ...
-  ],
-  "team 2": [
-    { 
-      "id": "56acbeb4-687d-4c8b-a881-0b9abdda64e4",
-      "response-queue": "player-7-queue",
-      "event-name": "find-game"
-    },
-    { 
-      "id": "1b23b523-dd19-4a8c-8749-9b20588c962a",
-      "response-queue": "player-8-queue",
-      "event-name": "find-game"
-    }
-    ...
-  ],
-  ...
+  }
+  "game-mode": "team-deathmatch"
 }
 ```
 
