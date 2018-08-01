@@ -135,7 +135,7 @@ An example of the response with the validation error:
 }
 ```
 
-# Updating an information about available slots for games (only between internal microservices)
+#### Updating an information about available slots for games (only between internal microservices)
 ```json
 {
   "id": "b188eb61-d19b-4c6b-b73b-ee744fda61c6",
