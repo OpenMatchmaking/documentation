@@ -8,33 +8,35 @@
 ### Benefits of using
 - All inner logic around instantiating new game servers for endusers is hidden
 - Game server only registers or updates the existing information about itself
-- Can be independently scaled up 
+- Can be scaled up independently 
 
 ### Dependencies
 - [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
 
 ### Entity relationship diagram
 #### Server table
-| Field name      | Field type | Constraints | Description                                |
-|-----------------|------------|-------------|--------------------------------------------|
-| id              | UUID       | PK          | A database unique object identifier        |
-| host            | VARCHAR    | NOT NULL    | IP address of the server                   |
-| port            | Integer    | NOT NULL    | The listened port by the server            |
-| available_slots | Integer    | NOT NULL    | Number of available slots for players      |
-| credentials     | JSON       | NOT NULL    | The data used for connecting to the server |
-| game_mode       | VARCHAR    | NOT NULL    | Type of served games                       |
+| Field name      | Field type  | Constraints | Description                                |
+|-----------------|-------------|-------------|--------------------------------------------|
+| id              | UUID        | PK          | A database unique object identifier        |
+| host            | VARCHAR     | NOT NULL    | IP address of the server                   |
+| port            | Integer     | NOT NULL    | The listened port by the server            |
+| available_slots | Integer     | NOT NULL    | Number of available slots for players      |
+| credentials     | JSON (dict) | NOT NULL    | The data used for connecting to the server |
+| game_mode       | VARCHAR     | NOT NULL    | Type of served games                       |
 
 ### RabbitMQ exchanges and queues 
 #### Queues
-| Queue name                        | Queue options                                                   | Exchange name           | Usage                                    | Returns                                  |
-|-----------------------------------|-----------------------------------------------------------------|-------------------------|------------------------------------------|------------------------------------------|
-| game-servers-pool.server.register | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Register a new game server               | A unique server ID or a validation error |
-| game-servers-pool.server.retrieve | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Get a server with credentials to connect | Server with credentials                  |
+| Queue name                        | Queue options                                                   | Exchange name           | Usage                                                           | Returns                                  |
+|-----------------------------------|-----------------------------------------------------------------|-------------------------|-----------------------------------------------------------------|------------------------------------------|
+| game-servers-pool.server.register | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Registers a new game server or updates all information about it | A unique server ID or a validation error |
+| game-servers-pool.server.retrieve | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Gets a server with credentials to connect                       | Server with credentials                  |
+| game-servers-pool.server.update   | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Updates an infomation about available slots for games           | The updated information about the server |
+
 
 ### Request and response examples
 
-#### Registering a new server
-Request:
+#### Registering a new server / Updating the information about the server
+A request for registering a new server:
 ```json
 {
   "host": "127.0.0.1",
@@ -47,7 +49,21 @@ Request:
 }
 ```
 
-Response (success):
+A request for updating an information about the server (when the server knows his the unique ID after registering):
+```
+{
+  "id": "b188eb61-d19b-4c6b-b73b-ee744fda61c6",
+  "host": "127.0.0.1",
+  "port": "5000",
+  "available-slots": 150,
+  "credentials": {
+      "token": "secret_token"
+  },
+  "game-mode": "team-deathmatch"
+}
+```
+
+An example of the response for the valid request:
 ```json
 {
   "content": {
@@ -57,7 +73,7 @@ Response (success):
 }
 ```
 
-Response (error):
+An example of the response with the validation error:
 ```json
 {
   "error": {
@@ -92,7 +108,7 @@ Request:
 }
 ```
 
-Response (success):
+An example of the response (success):
 ```json
 {
   "content": {
@@ -106,7 +122,7 @@ Response (success):
 }
 ```
 
-Response (error):
+An example of the response with the validation error:
 ```json
 {
   "error": {
@@ -116,5 +132,37 @@ Response (error):
       }
   },
   "event-name": "get-server"
+}
+```
+
+# Updating an information about available slots for games (only between internal microservices)
+```json
+{
+  "id": "b188eb61-d19b-4c6b-b73b-ee744fda61c6",
+  "freed-slots": 10
+}
+```
+
+An example of the response for the valid request:
+```json
+{
+  "content": {
+      "id": "b188eb61-d19b-4c6b-b73b-ee744fda61c6",
+      "available-slots": 110
+  },
+  "event-name": "register-new-server"
+}
+```
+
+An example of response with the validation error:
+```json
+{
+  "error": {
+      "type": "ValidationError",
+      "details": {
+          "freed-slots": ["Field can't be empty."]
+      }
+  },
+  "event-name": "register-new-server"
 }
 ```
