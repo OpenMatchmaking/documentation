@@ -2,7 +2,7 @@
 
 Here you can find the default RabbitMQ exchanges and queues which are available for any existing microservice in Open Matchmaking platform. 
 
-Any other exchanges must use its own exchanges (which most preferably) and follow the `open-matchmaking.{microservice}.{resource}.{operation_type}.{exchange_type}` format, where:
+Any other exchanges must use its own exchanges (which is the most preferable way) and follow the `open-matchmaking.{microservice}.{resource}.{operation_type}.{exchange_type}` format, where:
 - `{microservice}` is the microservice name.
 - `{resource}` is a resource / database table name.
 - `{operation_type}` operation under the resource. For example it can be:
