@@ -24,6 +24,11 @@
 | credentials     | JSON (dict) | NOT NULL    | The data used for connecting to the server |
 | game_mode       | VARCHAR     | NOT NULL    | Type of served games                       |
 
+### API Endpoints
+| Method | Endpoint | Usage | Returns |
+|--------|----------|-------|---------|
+|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
+
 ### RabbitMQ exchanges and queues 
 #### Queues
 | Queue name                        | Queue options                                                   | Exchange name                                            | Usage                                                           | Returns                                  |
@@ -31,7 +36,6 @@
 | game-servers-pool.server.register | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.game-server-pool.server.register.direct | Registers a new game server or updates all information about it | A unique server ID or a validation error |
 | game-servers-pool.server.retrieve | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.game-server-pool.server.retrieve.direct | Gets a server with credentials to connect                       | Server with credentials                  |
 | game-servers-pool.server.update   | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.game-server-pool.server.update.direct   | Updates an infomation about available slots for games           | The updated information about the server |
-
 
 ### Request and response examples
 
