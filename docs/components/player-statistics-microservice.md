@@ -25,6 +25,11 @@ This microservice is specialized on storing statistics data per for each existin
 
 Also the table can have an extra fields in database (for example, extra columns/documents in NoSQL or a nested JSON/HStore field in RDBMS) that can be used for providing for a detail information about the player.
 
+### API Endpoints
+| Method | Endpoint | Usage | Returns |
+|--------|----------|-------|---------|
+|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
+
 ### RabbitMQ exchanges and queues 
 #### Exchanges
 | Exchange name                                           | Exchange type | Options                                        |
