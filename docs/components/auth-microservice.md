@@ -76,3 +76,21 @@ As you can see on the picture, the microservice is communicating with three diff
 | Queue name                  | Queue options                                                   | Exchange name           | Usage                                        | Returns                    |
 |-----------------------------|-----------------------------------------------------------------|-------------------------|----------------------------------------------|----------------------------|
 | auth.microservices.register | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Register a new microservice with permissions | "OK" or a validation error |
+
+#### Example of a request for registering
+```json
+{
+    'name': 'my-microservice',
+    'version': '0.1.0',
+    'permissions': [
+        {
+            'codename': 'my-micoroservice.stats.retrieve',
+            'description': 'Can retrieve the player statistics',
+        },
+        {
+            'codename': 'my-micoroservice.stats.update',
+            'description': 'Can update the player statistics'
+        }
+    ]
+}
+```
