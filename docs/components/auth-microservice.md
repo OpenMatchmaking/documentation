@@ -78,7 +78,7 @@ As you can see on the picture, the microservice is communicating with three diff
 | auth.microservices.register | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Register a new microservice with permissions | "OK" or a validation error |
 
 #### Example of a request for registering
-```json
+```javascript
 {
     'name': 'my-microservice',
     'version': '0.1.0',
