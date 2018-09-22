@@ -19,6 +19,11 @@
 - [**Strategist microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/strategist-microservice.md)
 - [**Game servers pool**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/game-servers-pool.md)
 
+### API Endpoints
+| Method | Endpoint | Usage | Returns |
+|--------|----------|-------|---------|
+|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
+
 ### RabbitMQ exchanges and queues 
 #### Exchanges
 | Exchange name                                     | Exchange type | Options                                        |
