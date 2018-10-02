@@ -77,6 +77,18 @@ As you can see on the picture, the microservice is communicating with three diff
 |-----------------------------|-----------------------------------------------------------------|-------------------------|----------------------------------------------|----------------------------|
 | auth.microservices.register | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.direct | Register a new microservice with permissions | "OK" or a validation error |
 
+
+### Registering microservice
+For registering a microservice a developer should send a message to the `auth.microservices.register` queue with content inside in JSON format and `content_type=application/json` in headers. The content must contain the following fields: 
+
+| Field name | Parent | Description | Type |
+|------------|--------|-------------|------|
+| name | | Stores the name of the microservice. | String |
+| version | | Specifies the version of the registered microservice. Must specified in the `major.minor.minor` format. | String |
+| permissions | | Specifies a list of available permissions. | List of objects |
+| codename | permissions[index].object | Defines the permissions name. Must specified in the `microservice.resource.action` format. | String |
+| description | permissions[index].object | A short description of the certain permissions. | String |
+
 #### Example of a request for registering
 ```javascript
 {
@@ -84,11 +96,11 @@ As you can see on the picture, the microservice is communicating with three diff
     'version': '0.1.0',
     'permissions': [
         {
-            'codename': 'my-micoroservice.stats.retrieve',
-            'description': 'Can retrieve the player statistics',
+            'codename': 'my-microservice.stats.retrieve',
+            'description': 'Can retrieve the player statistics'
         },
         {
-            'codename': 'my-micoroservice.stats.update',
+            'codename': 'my-microservice.stats.update',
             'description': 'Can update the player statistics'
         }
     ]
