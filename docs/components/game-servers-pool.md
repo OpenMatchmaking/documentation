@@ -40,7 +40,18 @@
 ### Request and response examples
 
 #### Registering a new server / Updating the information about the server
-A request for registering a new server:
+For registering a new game server a developer should send a message to the `game-servers-pool.server.register` queue with content inside in JSON format and `content_type=application/json` in headers. The content contains the following fields:
+
+| Field name | Parent | Description | Type |
+|------------|--------|-------------|------|
+| id | | Stores a unique identifier of the registered microservice. Not required by default. | UUID as string |
+| host | | IP address of the server.  | String |
+| port | | The listened port by the server. | Integer |
+| available-slots | | Number of available slots for players. | Integer |
+| credentials | | The data used for connecting to the server. | Object |
+| game-mode | | Stores an information about the served type of games. | String |
+
+An example of a request for registering a new server (after processing by API gateway / reverse proxy):
 ```json
 {
   "host": "127.0.0.1",
@@ -53,7 +64,7 @@ A request for registering a new server:
 }
 ```
 
-A request for updating an information about the server (when the server knows his the unique ID after registering):
+A request for updating an information about the server (when the server knows his the unique ID after registering) look almost the same, except the specified `id` field in the request:
 ```
 {
   "id": "b188eb61-d19b-4c6b-b73b-ee744fda61c6",
@@ -91,8 +102,15 @@ An example of the response with the validation error:
 ```
 
 #### Receiving a server with credentials 
+For registering a new game server a developer should send a message to the `game-servers-pool.server.retrieve` queue with content inside in JSON format and `content_type=application/json` in headers. The content contains the following fields:
+
+| Field name | Parent | Description | Type |
+|------------|--------|-------------|------|
+| required-slots | | Requested an amount of slots for the new game session. | Integer |
+| game-mode | | Supported game type by a server that we're searching for. | String |
+
 Request:
-- By a client
+- By a client to API gateway / reverse proxy
 ```json
 {
   "url": "api/v1/game-servers-pool/retrieve",
@@ -140,6 +158,13 @@ An example of the response with the validation error:
 ```
 
 #### Updating an information about available slots for games (only between internal microservices)
+For registering a new game server a developer should send a message to the `game-servers-pool.server.update` queue with content inside in JSON format and `content_type=application/json` in headers. The content contains the following fields:
+
+| Field name | Parent | Description | Type |
+|------------|--------|-------------|------|
+| id | | A unique identifier of the registered microservice. | UUID as string |
+| freed-slots | | Stores an amount of game slots, freed after the finished game session. | Integer |
+
 ```json
 {
   "id": "b188eb61-d19b-4c6b-b73b-ee744fda61c6",
