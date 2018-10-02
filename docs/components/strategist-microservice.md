@@ -41,9 +41,17 @@ Because our microservice works with messages, we're expecting that each message 
 All required headers must be specified for each message as they were defined in [protocol document](https://github.com/OpenMatchmaking/documentation/blob/master/docs/protocol.md#headers).
 
 #### Check queue
-This queue is storing messages where each message contains an information about the used game mode for a new game, list of grouped players for the match and a new player which can be potentially added to this list of players.
+This queue is storing messages where each message contains an information about the used game mode for a new game, list of grouped players for the match and a new player which can be potentially added to this list of players. 
 
-Example of the message content that can be received by this microservice:
+For seeding a player / group into the existing group a developer should send a message to the `strategist.match.сheck` queue with content inside in JSON format and `content_type=application/json` in headers. The content must contain the following fields: 
+
+| Field name | Parent | Description | Type |
+|------------|--------|-------------|------|
+| game-mode | | The game mode name, that will be considered during seeding process. | String |
+| new-player | | Contains an information about the player that can be potentially seeded in the match. | Object |
+| grouped-players | | Contains the already grouped players for next match. | Object |
+
+An example of the message content that can be received by this microservice:
 ```javascript
 {
   "game-mode": "1v1",
@@ -82,7 +90,15 @@ Example of the message content that can be received by this microservice:
   }
 }
 ```
-The data for the `game-mode`, `new-player` and `grouped-players` fields are passed as is by the matchmaking microservice on the one of the processing stages.
+**NOTE**: The data for the `game-mode`, `new-player` and `grouped-players` fields are passed as is by the matchmaking microservice on the one of the processing stages.
+
+Each response from this microservice endpoint contains the following fields:
+
+| Field name | Parent | Description | Type |
+|------------|--------|-------------|------|
+| added | | A boolean flag indicating whether a player has been added to one of the groups. | Boolean |
+| is_filled | | The special boolean flag means that the all teams are filled and this data can be user for creating a new game lobby. | Boolean |
+| grouped-players | | An object that stores an information about the prepared teams for the match. | Object |
 
 Example of the response:
 ```javascript
@@ -123,4 +139,3 @@ Example of the response:
   }
 }
 ```
-The `is_filled` field as the boolean flag means that the teams are filled and this data can be user for creating a new game lobby.
