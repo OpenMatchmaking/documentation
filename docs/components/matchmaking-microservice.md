@@ -54,6 +54,12 @@ All required headers must be specified for each message as they were defined in 
 #### Middleware queue
 This queue is focused on the processing incoming messages, validating and passing them to the next processing stage if they are valid. Otherwise returns an error to the client.
 
+For starting searching a new game a player must send a message to the `matchmaking.games.search` queue with content inside in JSON format and `content_type=application/json` in headers. The content contains the following fields: 
+
+| Field name | Parent | Description | Type |
+|------------|--------|-------------|------|
+| game-mode | | The name of the game mode, where search will be executed. | String |
+
 Example of the message content that will passed to the next stage:
 ```javascript
 {
