@@ -86,6 +86,7 @@ As you can see on the picture, the microservice is communicating with three diff
 | auth.users.retrieve         | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.auth.users.retrieve.direct | Returns an information about the current user                     | User                                       |
 | auth.users.register         | durable=True, passive=False, exclusive=False, auto_delete=False | open-matchmaking.auth.users.register.direct | Create a new user for the game client                             | User or a validation error                 |
 
+### Request and response examples
 ### Registering microservice
 For registering a microservice a developer should send a message to the `auth.microservices.register` queue with content inside in JSON format and `content_type=application/json` in headers. The content must contain the following fields: 
 
@@ -97,7 +98,7 @@ For registering a microservice a developer should send a message to the `auth.mi
 | codename | permissions[index].object | Defines the permissions name. Must specified in the `microservice.resource.action` format. | String |
 | description | permissions[index].object | A short description of the certain permissions. | String |
 
-#### Example of a request for registering
+An example of a request for registering:
 ```javascript
 {
     'name': 'my-microservice',
@@ -112,5 +113,123 @@ For registering a microservice a developer should send a message to the `auth.mi
             'description': 'Can update the player statistics'
         }
     ]
+}
+```
+
+### Creating a new JSON Web Token (JWT)
+For creating a new JSON Web Token the user needs to send a message to the `auth.token.new` queue with a content that contains the following fields:
+
+| Field name | Parent | Description                  | Type   |
+|------------|--------|------------------------------|--------|
+| username   |        | A user's login.              | String |
+| password   |        | A password from the account. | String |
+
+An example of the request from the reverse proxy:
+```javascript
+{
+    'username': 'some_user',
+    'password': 'super_secret_password'
+}
+```
+
+An example of the response:
+```javascript
+{
+    'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDYxOTUsImF1ZCI6IiIsInN1YiI6IiJ9.Z3zURZaWvX1p2B5dRqO1ma1-NC6Ip7blYIEyzylSi4s',
+    'refresh_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDczMTEsImF1ZCI6IiIsInN1YiI6InJlZnJlc2gifQ.yg0zQtyxtHZ-nIxF5q70q-sph38sU5g5R6sMPt3qE6U'
+}
+```
+
+### Verifying the JSON Web Token (JWT)
+For verifying the generated JSON Web Token the user needs to send a message to the `auth.token.verify` queue with a content that contains the following fields:
+
+| Field name   | Parent | Description                   | Type   |
+|--------------|--------|-------------------------------|--------|
+| access_token |        | A generated JSON Web Token.   | String |
+
+An example of the request from the reverse proxy:
+```javascript
+{
+    'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDYxOTUsImF1ZCI6IiIsInN1YiI6IiJ9.Z3zURZaWvX1p2B5dRqO1ma1-NC6Ip7blYIEyzylSi4s'
+}
+```
+
+An example of the response:
+```javascript
+{
+    'content': "OK",
+    'valid': true
+}
+```
+
+### Refreshing the JSON Web Token (JWT)
+For refreshing the JSON Web Token the user needs to send a message to the `auth.token.refresh` queue with a content that contains the following fields:
+
+| Field name    | Parent | Description                   | Type   |
+|---------------|--------|-------------------------------|--------|
+| access_token  |        | A generated JSON Web Token.   | String |
+| refresh_token |        | A generated JSON Web Token which using for generating a new access JSON Web Token. | String |
+
+An example of the request from the reverse proxy:
+```javascript
+{
+    'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDYxOTUsImF1ZCI6IiIsInN1YiI6IiJ9.Z3zURZaWvX1p2B5dRqO1ma1-NC6Ip7blYIEyzylSi4s',
+    'refresh_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDczMTEsImF1ZCI6IiIsInN1YiI6InJlZnJlc2gifQ.yg0zQtyxtHZ-nIxF5q70q-sph38sU5g5R6sMPt3qE6U'
+}
+```
+
+An example of the response:
+```javascript
+{
+    'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcyMDI2LCJleHAiOjE1NzAxMDgwMjYsImF1ZCI6IiIsInN1YiI6IiJ9.UmRDMP6ocNacTD7clmCWwtO74PvFRwgjnvvf6k-bYY0'
+}
+```
+
+### Retrieving a user profile
+For verifying the generated JSON Web Token the user needs to send a message to the `auth.users.retrieve` queue with a content that contains the following fields:
+
+| Field name   | Parent | Description                   | Type   |
+|--------------|--------|-------------------------------|--------|
+| id           |        | A unique user identifier.     | String |
+
+An example of the request from the reverse proxy:
+```javascript
+{
+    'id': '5bb4c9841f8ec0004524a54f'
+}
+```
+
+An example of the response:
+```javascript
+{
+    'id': '5bb4c9841f8ec0004524a54f',
+    'username': 'some_user',
+    'permissions': ['matchmaking.games.retrieve', 'matchmaking.games.update']
+}
+```
+
+### Registering a new user
+For verifying the generated JSON Web Token the user needs to send a message to the `auth.users.register` queue with a content that contains the following fields:
+
+| Field name       | Parent | Description                 | Type   |
+|------------------|--------|-----------------------------|--------|
+| user             |        | A unique username.          | String |
+| password         |        | A password for the account. | String |
+| confirm_password |        | A password confirmation.    | String |
+
+An example of the request from the reverse proxy:
+```javascript
+{
+    'username': 'some_user',
+    'password': '123456',
+    'confirm_password': '123456'
+}
+```
+
+An example of the response:
+```javascript
+{
+    'id': '5bb4c9841f8ec0004524a54f',
+    'username': 'some_user'
 }
 ```
