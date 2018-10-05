@@ -17,10 +17,9 @@ General principles of auth/auth microservice can be shown with the following pic
   <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth-schema.png"/>
 </p>
 
-As you can see on the picture, the microservice is communicating with three different entities with using storage as a database for a some data:
-- Game client is authenticating for getting an access and a refresh tokens  
-- Reverse proxy is going to use this microservice for verifying the given token from the game client and receiving a user data that will be used per each request before sending it to the certain message queue
-- Internal parts of Open Matchmaking which are communicating via specially created message queues for auth/auth microservice. It's a hidden part, a **don't provide** any public APIs for it. Only for internal usage
+As you can see on the picture, the microservice is communicating with two different entities:
+1) With reverse proxy, which is sending requests to the certain microservice (in this case they are to Auth/Auth microservice) with a content inside.
+2) With internal parts of Open Matchmaking which are communicating via specially created message queues for auth/auth microservice. It's a hidden part, a **don't provide** any public APIs for endusers. Only for internal usage.
 
 ### Entity relationship diagram
 <p align="center">
