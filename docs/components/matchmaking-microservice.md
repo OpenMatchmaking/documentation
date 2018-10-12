@@ -3,6 +3,7 @@
 ### Additional info
 - [**Distributing tasks for a search**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#distributing-tasks-for-a-search)
 - [**Saving the worker state**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#saving-the-worker-state)
+- [**Searching games with considering player's location**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#searching-games-with-considering-players-location)
 - [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
 
 ### Why
