@@ -139,6 +139,8 @@ An example of the response:
 }
 ```
 
+Each `access_token` contains a `user_id` in payload so that the any server could understand which user is doing the certain action under the resource.
+
 ### Verifying the JSON Web Token (JWT)
 For verifying the generated JSON Web Token the user needs to send a message to the `auth.token.verify` queue with a content that contains the following fields:
 
@@ -190,6 +192,8 @@ For verifying the generated JSON Web Token the user needs to send a message to t
 | Field name    | Parent | Description                   | Type   |
 |---------------|--------|-------------------------------|--------|
 | access_token  |        | A generated JSON Web Token.   | String |
+
+P.S. In actual moment of time users can retrieve only his own user profile that associated with the generated token by Auth/Auth microservice.
 
 An example of the request from the reverse proxy:
 ```javascript
