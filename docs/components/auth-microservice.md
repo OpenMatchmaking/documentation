@@ -187,14 +187,14 @@ An example of the response:
 ### Retrieving a user profile
 For verifying the generated JSON Web Token the user needs to send a message to the `auth.users.retrieve` queue with a content that contains the following fields:
 
-| Field name   | Parent | Description                   | Type   |
-|--------------|--------|-------------------------------|--------|
-| id           |        | A unique user identifier.     | String |
+| Field name    | Parent | Description                   | Type   |
+|---------------|--------|-------------------------------|--------|
+| access_token  |        | A generated JSON Web Token.   | String |
 
 An example of the request from the reverse proxy:
 ```javascript
 {
-    'id': '5bb4c9841f8ec0004524a54f'
+    'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIiLCJpYXQiOjE1Mzk2NzY2NDYsImV4cCI6MTU3MTIxMjY0NywiYXVkIjoiIiwic3ViIjoiIiwidXNlcl9pZCI6IjViYjRjOTg0MWY4ZWMwMDA0NTI0YTU0ZiJ9.3jUYf-ffQVJjdERnSYXApTAfvA3QLsiIQIWDQKHniZE'
 }
 ```
 
