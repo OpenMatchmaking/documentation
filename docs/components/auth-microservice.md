@@ -134,8 +134,11 @@ An example of the request from the reverse proxy:
 An example of the response:
 ```javascript
 {
-    'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDYxOTUsImF1ZCI6IiIsInN1YiI6IiJ9.Z3zURZaWvX1p2B5dRqO1ma1-NC6Ip7blYIEyzylSi4s',
+  'content': {
+     'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDYxOTUsImF1ZCI6IiIsInN1YiI6IiJ9.Z3zURZaWvX1p2B5dRqO1ma1-NC6Ip7blYIEyzylSi4s',
     'refresh_token': 'd49ac89a2da505b689281f70460d80e0'
+  },
+  'event-name': 'generate-new-token'
 }
 ```
 
@@ -158,8 +161,10 @@ An example of the request from the reverse proxy:
 An example of the response:
 ```javascript
 {
-    'content': "OK",
-    'valid': true
+  'content': {
+    'is_valid': true
+  },
+  'event-name': 'verify-jwt'
 }
 ```
 
@@ -182,7 +187,10 @@ An example of the request from the reverse proxy:
 An example of the response:
 ```javascript
 {
+  'content': {
     'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcyMDI2LCJleHAiOjE1NzAxMDgwMjYsImF1ZCI6IiIsInN1YiI6IiJ9.UmRDMP6ocNacTD7clmCWwtO74PvFRwgjnvvf6k-bYY0'
+  },
+  'event-name': 'refresh-jwt'
 }
 ```
 
@@ -205,9 +213,12 @@ An example of the request from the reverse proxy:
 An example of the response:
 ```javascript
 {
+  'content': {
     'id': '5bb4c9841f8ec0004524a54f',
     'username': 'some_user',
     'permissions': ['matchmaking.games.retrieve', 'matchmaking.games.update']
+  },
+  'event-name': 'get-profile'
 }
 ```
 
@@ -232,7 +243,10 @@ An example of the request from the reverse proxy:
 An example of the response:
 ```javascript
 {
+  'content': {
     'id': '5bb4c9841f8ec0004524a54f',
     'username': 'some_user'
+  },
+  'event-name': 'new-game-client'
 }
 ```
