@@ -135,7 +135,7 @@ An example of the response:
 ```javascript
 {
     'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDYxOTUsImF1ZCI6IiIsInN1YiI6IiJ9.Z3zURZaWvX1p2B5dRqO1ma1-NC6Ip7blYIEyzylSi4s',
-    'refresh_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDczMTEsImF1ZCI6IiIsInN1YiI6InJlZnJlc2gifQ.yg0zQtyxtHZ-nIxF5q70q-sph38sU5g5R6sMPt3qE6U'
+    'refresh_token': 'd49ac89a2da505b689281f70460d80e0'
 }
 ```
 
@@ -175,7 +175,7 @@ An example of the request from the reverse proxy:
 ```javascript
 {
     'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDYxOTUsImF1ZCI6IiIsInN1YiI6IiJ9.Z3zURZaWvX1p2B5dRqO1ma1-NC6Ip7blYIEyzylSi4s',
-    'refresh_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoIiwiaWF0IjoxNTM4NTcwMTk0LCJleHAiOjE1NzAxMDczMTEsImF1ZCI6IiIsInN1YiI6InJlZnJlc2gifQ.yg0zQtyxtHZ-nIxF5q70q-sph38sU5g5R6sMPt3qE6U'
+    'refresh_token': 'd49ac89a2da505b689281f70460d80e0'
 }
 ```
 
