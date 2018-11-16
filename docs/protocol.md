@@ -61,7 +61,7 @@ Each prepared message for communicating betwee microservices contains two parts:
 Custom RabbitMQ headers:
 - `microservice_name` - A unique microservice name which is used for understanding which service should process this request.
 - `request_url` - The original URL as a string which is used to identify a resource.
-- `permissions` - A list of permissions to resources splitted with the comma. Each permission must be specified in `{microservice}.{resource}.{action}` format.
+- `permissions` - A list of permissions to resources splitted with the `;` character. Each permission must be specified in `{microservice}.{resource}.{action}` format.
 - `user_id` - A unique UUID identifier, generated and stored in Auth / Auth microservice per each user.
 
 Default RabbitMQ headers:
