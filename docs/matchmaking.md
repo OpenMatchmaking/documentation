@@ -18,7 +18,7 @@ How much groups of players should be? It mainly depends on the game, to which yo
 Then, after creating groups, necessary to figure out, how to processing requests from a clients that would like to play in game with other players. Well, the simpler and more understandable the solution, the better the result we will get. Look at the following picture, how it can be potentially solved:
 
 <p align="center">
-  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/distributing-search-tasks.png"/>
+  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/matchmaking/distributing-search-tasks.png"/>
 </p>
 
 The demonstrated schema is pretty straightforward. For getting an idea how it should work, we will consider a case for searching a game for a diamond player (for any other league it will work by analogy): 
