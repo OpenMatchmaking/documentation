@@ -11,7 +11,7 @@ This microservice is specialized on storing statistics data per for each existin
 - The stored data can be used for analytics and tracking for a state of the game (balance, the most picked characters and so on)
 
 ### Dependencies
-- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
+- [**Authorization / Authentication microservice**](auth-microservice.md)
 
 ### Entity relationship diagram
 #### Statistic table
