@@ -63,13 +63,13 @@ Some people can be curious about how to search a team for players that have diff
   <br>Instead of letting to people to play from the different location in the one game, you could split up them by regions (like onto North America, Europe, Asia) for getting better game experience and team balance. To achieve this, you need to provide users an opportunity to register in each separate region. Also using this solution, you do not need to configure the project for each region as a whole, because the codebase is identical, but divided only into service regions (e.g. via cloud services).
   
 2) Add a new stage of processing for [Matchmaking microservice](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/matchmaking-microservice.md)  
-  - In the case of using this approach, all you need to do is add another processing stage, for example, after a generic queue. When using this solution, you get some flexibility in processing requests from users, because you have complete control over the data with a group of players and you can apply additional filtering and balancing rules in cases when a player has too high latency.   
+  - In the case of using this approach, everything you need is to do is add another processing stage, for example, after a generic queue. When using this solution, you get some flexibility in processing requests from users, because you have a complete control over the data with a group of players and could apply additional filtering and balancing rules when the player has too high latency.   
 
 <p align="center">
   <img src="images/matchmaking/with-location-filter-stage.png"/>
 </p>
 
-  - From another point of view, you can have several different queues, each of which only serves a specific region for players. For example, a player from North America can be placed in the diamond queue only for similar players from the same region, and from Europe to another. This approach also has the right to use, although it requires additional efforts on support and development.
+  - On the other hand, the project could use several different queues, each of which only serves a specific region for players. For example, players from North America could be placed in the diamond queue only with similar players from the same location, where is from Europe only with each other. This approach also has the right to use, although it requires additional efforts on support and development.
 
 <p align="center">
   <img src="images/matchmaking/separate-region-queues.png"/>
