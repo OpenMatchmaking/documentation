@@ -61,8 +61,8 @@ Searching games with considering player's location
 Some people can be curious about how to search a team for players that have different locations (e.g. on continents). So, for it a developer have three different ways to handle it, just pick the most suitable solution to you:
 1) Split up players audience by regions in which they are playing  
   <br>Instead of letting to people to play from the different location in the one game, you could split up them by regions (like onto North America, Europe, Asia) for getting better game experience and team balance. To achieve this, you need to provide users an opportunity to register in each separate region. Also using this solution, you do not need to configure the project for each region as a whole, because the codebase is identical, but divided only into service regions (e.g. via cloud services).
-  
-2) Add a new stage of processing for [Matchmaking microservice](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/matchmaking-microservice.md)  
+
+2) Add a new stage of processing for [Matchmaking microservice](components/matchmaking-microservice.md)  
   - In the case of using this approach, everything you need is to do is add another processing stage, for example, after a generic queue. When using this solution, you get some flexibility in processing requests from users, because you have a complete control over the data with a group of players and could apply additional filtering and balancing rules when the player has too high latency.   
 
 <p align="center">
@@ -75,7 +75,7 @@ Some people can be curious about how to search a team for players that have diff
   <img src="images/matchmaking/separate-region-queues.png"/>
 </p>
   
-3) Extend the functionality of [Strategist microservice](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/strategist-microservice.md)   
+3) Extend the functionality of [Strategist microservice](components/strategist-microservice.md)   
   <br>In the case when you can provide information about a player (e.g. his location and average delay), this solution can be quite good, because you're communicating only with the certain microservice, that groups up players in one team (or maybe even in the game in general) with close location. At the same time, you will not need to change the logic of other components of the system - all changes occur in one microservice that deals only with building fair matches.
 
 Strategies of a searching players
