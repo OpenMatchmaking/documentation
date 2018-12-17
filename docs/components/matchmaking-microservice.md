@@ -1,10 +1,10 @@
 # Matchmaking microservice
 
 ### Additional info
-- [**Distributing tasks for a search**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#distributing-tasks-for-a-search)
-- [**Saving the worker state**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#saving-the-worker-state)
-- [**Searching games with considering player's location**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#searching-games-with-considering-players-location)
-- [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
+- [**Distributing tasks for a search**](../matchmaking.md#distributing-tasks-for-a-search)
+- [**Saving the worker state**](../matchmaking.md#saving-the-worker-state)
+- [**Searching games with considering player's location**](../matchmaking.md#searching-games-with-considering-players-location)
+- [**Strategies of a searching players**](../matchmaking.md#strategies-of-a-searching-players)
 
 ### Why
 - Necessary to have a separate microservice that processing requests related to searching players for a new match
@@ -15,10 +15,10 @@
 - Configuring used strategies for this microservice brings the flexibility in describing the expected behaviour
 
 ### Dependencies
-- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
-- [**Player statistics microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/player-statistics-microservice.md)
-- [**Strategist microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/strategist-microservice.md)
-- [**Game servers pool**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/game-servers-pool.md)
+- [**Authorization / Authentication microservice**](auth-microservice.md)
+- [**Player statistics microservice**](player-statistics-microservice.md)
+- [**Strategist microservice**](strategist-microservice.md)
+- [**Game servers pool**](game-servers-pool.md)
 
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
@@ -50,7 +50,7 @@ P.S.S. All queues, except the `matchmaking.games.search` and `matchmaking.games.
 ### Messages
 Because our microservice works with messages, we're expecting that each message will be with fixed amount of fields and will be defined in the concrete format, so that it will be possible to implement any desirable algorightm that will process the messages and will connect the players in one game lobby later.
 
-All required headers must be specified for each message as they were defined in [protocol document](https://github.com/OpenMatchmaking/documentation/blob/master/docs/protocol.md#headers).
+All required headers must be specified for each message as they were defined in [protocol document](../protocol.md#headers).
 
 #### Middleware queue
 This queue is focused on the processing incoming messages, validating and passing them to the next processing stage if they are valid. Otherwise returns an error to the client.
