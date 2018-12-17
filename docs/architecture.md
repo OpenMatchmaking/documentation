@@ -2,8 +2,8 @@
 
 Summary
 -------
-- [**How it works**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/architecture.md#how-it-works)
-- [**Protocol**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/protocol.md)
+- [**How it works**](architecture.md#how-it-works)
+- [**Protocol**](protocol.md)
 
 How it works
 ------------
@@ -23,7 +23,7 @@ Now let's move on to the usage of the Open Matchmaking platform for your own gam
 For describing the generic schema of working with matchmaking services, we will be using the next image:
 
 <p align="center">
-  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/architecture-with-auth.png"/>
+  <img src="images/architecture-with-auth.png"/>
 </p>
 
 1) Client sends request to the Auth/Auth microservice and provides some required data (login/password, etc.) 

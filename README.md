@@ -2,10 +2,10 @@
 
 Summary
 -------
-- [**What are the objectives of the project?**](https://github.com/OpenMatchmaking/documentation#what-are-the-objectives-of-the-project)
-- [**Project overview**](https://github.com/OpenMatchmaking/documentation/tree/master/docs)
-- [**References**](https://github.com/OpenMatchmaking/documentation#references)
-- [**License**](https://github.com/OpenMatchmaking/documentation#license)
+- [**What are the objectives of the project?**](#what-are-the-objectives-of-the-project)
+- [**Project overview**](docs#project-overview)
+- [**References**](#references)
+- [**License**](#license)
 
 What are the objectives of the project?
 ---------------------------------------

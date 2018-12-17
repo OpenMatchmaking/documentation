@@ -12,7 +12,7 @@ What is reverse proxy?
 Now, when you was get an idea what is it, let's see on the next scheme:
 
 <p align="center">
-  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/reverse-proxy.png"/>
+  <img src="../images/reverse-proxy.png"/>
 </p>
 
 1) Client connecting with a reverse proxy via some protocol (for instance, HTTP or WebSockets). And sends some part of data to it. If necessary to check credentials / tokens / etc. the reverse proxy also can do this work.
