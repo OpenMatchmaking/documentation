@@ -3,7 +3,7 @@
 This microservice is specialized on forming up the groups of players and building fair matches for each player.
 
 ### Additional info
-- [**Strategies of a searching players**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/matchmaking.md#strategies-of-a-searching-players)
+- [**Strategies of a searching players**](../matchmaking.md#strategies-of-a-searching-players)
 
 ### Why 
 - Elixir/Erlang libraries for integrating with Python interpreters not enough flexible for unusual use cases
@@ -17,7 +17,7 @@ This microservice is specialized on forming up the groups of players and buildin
 - A minimal overhead on intergrating different microservices
 
 ### Dependencies
-- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
+- [**Authorization / Authentication microservice**](auth-microservice.md)
 
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
@@ -38,7 +38,7 @@ This microservice is specialized on forming up the groups of players and buildin
 ### Messages
 Because our microservice works with messages, we're expecting that each message will be with fixed amount of fields and will be defined in the concrete format, so that it will be possible to implement any desirable algorightm that will process the messages and will connect the players in one game lobby later.
 
-All required headers must be specified for each message as they were defined in [protocol document](https://github.com/OpenMatchmaking/documentation/blob/master/docs/protocol.md#headers).
+All required headers must be specified for each message as they were defined in [protocol document](../protocol.md#headers).
 
 #### Check queue
 This queue is storing messages where each message contains an information about the used game mode for a new game, list of grouped players for the match and a new player which can be potentially added to this list of players. 
