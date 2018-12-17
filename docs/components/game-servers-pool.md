@@ -11,7 +11,7 @@
 - Can be scaled up independently 
 
 ### Dependencies
-- [**Authorization / Authentication microservice**](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/auth-microservice.md)
+- [**Authorization / Authentication microservice**](auth-microservice.md)
 
 ### Entity relationship diagram
 #### Server table
