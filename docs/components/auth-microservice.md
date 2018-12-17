@@ -7,14 +7,14 @@
 - Required a storage for microservices permissions, so that they can be assigned to each existing user
 
 ### Benefits of using
-- Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy](https://github.com/OpenMatchmaking/documentation/blob/master/docs/components/reverse-proxy.md#reverse-proxy)
+- Can be used as the 3rd party authorization/authentication service for restricting an access in a pair with [reverse proxy](reverse-proxy.md#reverse-proxy)
 - A good choice for cases when Open Matchmaking project should work independently, without communicating with other services (not related to Open Matchmaking)
 
 ### General information
 General principles of auth/auth microservice can be shown with the following picture:
 
 <p align="center">
-  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth/schema.png"/>
+  <img src="../images/microservice-auth/schema.png"/>
 </p>
 
 As you can see on the picture, the microservice is communicating with two different entities:
@@ -23,7 +23,7 @@ As you can see on the picture, the microservice is communicating with two differ
 
 ### Entity relationship diagram
 <p align="center">
-  <img src="https://github.com/OpenMatchmaking/documentation/blob/master/docs/images/microservice-auth/db.png"/>
+  <img src="../images/microservice-auth/db.png"/>
 </p>
 
 **IMPORTANT**: The tables "Group", "Permission" and "Microservice" will be updated by the other part of microservice, that will be handling requests from inner microservices after their instantiating.
