@@ -20,35 +20,42 @@ Now let's move on to the usage of the Open Matchmaking platform for your own gam
 - The project can have a private cloud, but you can't get an access to add some external dependencies and necessary somehow provide a way to connect players together.
 - Necessary to divide the project on the small parts, which can be developed by different developers and studios (like sharing of responsibility), but you need also a Authentication / Authorization layer.
 
-For describing the generic schema of working with matchmaking services, we will be using the next image:
+User authentication / authorization 
+-----------------------------------
+Before getting an access to the certain microservice, user has to be registered and received the token that must be provided in request body. The representation of those communications with microservice is shown on the following picture:
 
 <p align="center">
-  <img src="images/architecture-with-auth.png"/>
+  <img src="images/architecture-auth.png"/>
 </p>
 
-1) Client sends request to the Auth/Auth microservice and provides some required data (login/password, etc.) 
-2) An existing node takes the request, and started to processing it in the few steps:  
-  2.1. Checks the credentials for a user. If they aren invalid - returns an error, otherwise going further.  
-  2.2. Generating a new token for the client.  
-  2.3. Prepare the response for a client return access token.
-3) Auth/Auth microservice returns the generated response to the game client.
-4) Game client is trying to establish a connection with one of reverse proxy instances, via getting an access to it through a load balancer that redirect to one of them on the first attempt of an access. If connection attempt was failed (reverse proxy node was shutdown or somehow disconnected from a cluster), then game client should pass 1-3 steps once again. Otherwise going further.
-5) Reverse proxy accepts connection with a client and checking the access token, that was specified by the connected client in request. If it invalid or expired, then returns an error. Otherwise, if it's valid then necessary to send a request for getting a list of permissions for the user and use it later for the setup a permission header for a message on the next step.
-6) Reverse proxy will wrap this request into a "message", set required headers and put it in one of available message queues, which are listening by all existing matchmaking microservices. For getting a response from a one of processing nodes, reverse proxy just listening for a message in a mailbox with the appropriate request_id, which was set by it.
-7) One of the appropriate servers which is could process it, takes the message from the message queue. The processing node receives the request, and before its processing do subscribing on the messages with the player ID, that was specified in request.   
-**NOTE:** This step should be done only once when the player runned a game client, logged into system and runned a searching in the first time.
-4) Server adds a new asynchronous task in tasks pool (i.e. Celery with Python 3+) or delegate a task to an actor on the server (Elixir/Erlang actors, Skala with Akka framework and so on) and after it, starts processing a new request.
-9) Doing business logic:  
-  9.1. On of the existing worker is running an appropriate code that will do some useful work (building a leaderboard, searching a player/team).  
-  9.2. If it will be necessary, this code could take same data from the storage which stores information about finished maches, players and so on. For instance, during activity of the player all data could be stored in NoSQL storage (like CouchDB, Mnesia, Redis, etc.) and any other data in some relational database (like PostgreSQL, MySQL, etc.).
-10) When all required work were completed, finished task put the message with player ID into message queue (it could be RabbitMQ, ZeroMQ, etc.).
-11) Because our backend server is subscribed on the messages with particular player ID, it just received this message from a message queue, extract the result from it, make some additional post-processing actions (if it will be necessary) and put the new message in one on message queues.
-12) Because the reverse proxy is listening messages with the particular request_id, it extract the message from a message queue, when it will be appeared and prepare the response for the game client.
-13) Send a response to the waiting game client with the data that was prepared on the previous step.
-14) Game client is trying to connect to the prepared game server, entering into already created game lobby and waiting until other players will be connected.
-15) After the game is prepared, game server started a new game with the connected users. The game server and game client just communicating with each other and sychronizing game states and do some additional work that required during the current game session.  
-16) When the game was finished, game server sends a request with information about the completed game in body to one of existing reverse proxy node. Of course and for this case as well, before passing a data to the appropriate reverse proxy instance, it will necessary to refer to the load balancer that will send a client to a separate processing node.   
-**NOTE:** For game servers no needed any authorization and authentication, because they will be a part of inner system and have a direct access to RabbitMQ and special queues.
-17) Reverse proxy like on the previous steps, wraps a request into a "message" and put it in one of available message queues. Also subscribing to getting a response from a some existing processing node. When the message will be recieved, will return it to a caller.
-18) One of the appropriate servers which is could process it, takes the message from the message queue. Unwraps the message, and do some useful work. Puts the message into a message queue with the label, that data processing was started.
-19) Matchmaking service received a request to save this part of data, and update/refresh it in the appropriate storage.
+1. Client sends request to the Auth/Auth microservice and provides some required data (login/password, etc.). The request is forwarded by load balancer (it could be any Open Source solution or provided by a cloud provider) to reverse proxy node. 
+2. The reverse proxy node passes the received request into Auth/Auth microservice queues which are listened by RabbitMQ workers that are going to do some useful work. In addition to it, the reverse proxy node creates the special queue for the responses that will be returned to enduser later.
+3. One of RabbitMQ workers receives the user's request and starting to process it. During the processing, works does the following work:  
+  3.1. Checks the credentials for a user. If they aren invalid - returns an error, otherwise going further.
+  3.2. Generating a new token for the client.  
+  3.3. Prepare the response for a client return access token.
+4. The prepared token is saved in databases for speed up the check process when it's necessary.
+5. The RabbitMQ workers, based on the work from 3-4 steps pushes the prepared response to the "Response user's queue" which is listening by reverse proxy and waiting for a message.
+6. Reverse proxy application takes the response and converts it appropriate format, described in [protocol documentation](protocol.md).
+7. The prepared response returns to enduser.
+
+Forwarding requests to microservices
+-------------------------------------
+For the case when necessary to communicate with the certain microservice, the internal communications are quite similar to those was described in the previous part. Schematically those communications could look like this:
+
+<p align="center">
+  <img src="images/architecture-forwarding-requests.png"/>
+</p>
+
+1. Client sends request to the Auth/Auth microservice and provides some required data (login/password, etc.). The request is forwarded by load balancer (it could be any Open Source solution or provided by a cloud provider) to reverse proxy node. 
+2. The reverse proxy node passes the received request into Auth/Auth microservice queues which are listened by RabbitMQ workers that are going to do some useful work. In addition to it, the reverse proxy node creates the special queue for the responses that will be returned to enduser later.
+3. One of RabbitMQ workers receives the user's request and starting to process it. 
+4. During the request processing, the RabbitMQ worker communicates with databases and checks the passed credentials for a user. If they are invalid - returns an error.
+5. The RabbitMQ workers, based on the work from 3-4 steps pushes the prepared response to the "Response user's queue" which is listening by reverse proxy and waiting for a message.
+6. Based on the received response, reverse proxy passes the actual request to the certain request in the case if everything is correct and has no errors. Otherwise, the client will receive an error message.
+7. The reverse proxy passes actual request into the certain queue, that listening by microservice.
+8. One of RabbitMQ workers takes the request and start processing in according with their business logic.
+9. During the request processing stage, worker can communicate with different storages (databases, caches, etc.) for reading/writing data and serializing it.
+10. The prepared response is pushed by the worker into response queue, listened by reverse proxy.
+11. Reverse proxy application takes the response and converts it appropriate format, described in [protocol documentation](protocol.md).
+12. The prepared response returns to enduser.
