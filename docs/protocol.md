@@ -59,10 +59,10 @@ Each prepared message for communicating betwee microservices contains two parts:
 
 ### Headers
 Custom RabbitMQ headers:
-- `routing_key` - A unique routing key which is used for understanding which part of service should process this request.
-- `request_url` - The original URL as a string which is used to identify a resource.
-- `permissions` - A list of permissions to resources splitted with the `;` character. Each permission must be specified in `{microservice}.{resource}.{action}` format.
-- `user_id` - A unique UUID identifier, generated and stored in Auth / Auth microservice per each user.
+- `om_routing_key` - A unique routing key which is used for understanding which part of service should process this request.
+- `om_request_url` - The original URL as a string which is used to identify a resource.
+- `om_permissions` - A list of permissions to resources splitted with the `;` character. Each permission must be specified in `{microservice}.{resource}.{action}` format.
+- `om_user_id` - A unique UUID identifier, generated and stored in Auth / Auth microservice per each user.
 
 Default RabbitMQ headers:
 - `content_type` - Specifies the data type in the message body. Default is `application/json`.
