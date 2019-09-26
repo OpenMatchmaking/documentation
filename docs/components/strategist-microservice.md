@@ -22,7 +22,7 @@ This microservice is specialized on forming up the groups of players and buildin
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
-|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
+|GET     | /strategist/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
 
 ### RabbitMQ exchanges and queues 
 #### Exchanges
