@@ -28,7 +28,7 @@ Also the table can have an extra fields in database (for example, extra columns/
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
-|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
+|GET     | /player-statistics/api/health-check | Health check endpoint for API Gateways                            | "OK" |
 
 ### RabbitMQ exchanges and queues 
 #### Exchanges
