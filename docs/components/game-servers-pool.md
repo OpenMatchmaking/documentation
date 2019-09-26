@@ -27,7 +27,7 @@
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
-|GET     | /player-statistics/api/health-check | Health check endpoint for API Gateways                            | "OK" |
+|GET     | /game-servers-pool/api/health-check | Health check endpoint for API Gateways                            | "OK" |
 
 ### RabbitMQ exchanges and queues 
 #### Queues
