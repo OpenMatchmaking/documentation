@@ -23,7 +23,7 @@
 ### API Endpoints
 | Method | Endpoint | Usage | Returns |
 |--------|----------|-------|---------|
-|GET     | /auth/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
+|GET     | /matchmaking/api/health-check    | Health check endpoint for API Gateways                            | "OK" |
 
 ### RabbitMQ exchanges and queues 
 #### Exchanges
